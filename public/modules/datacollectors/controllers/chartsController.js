@@ -45,8 +45,7 @@ angular.module('datacollectors').controller('chartsController', ['$scope', '$htt
                 },
                 title: 'My Chart'
 
-            }
-
+            };
     }
 ]);
 

@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('datacollectors')
     .controller('TabController', ['$scope','$http', function ($scope, $http) {
         console.log('This is TabController');

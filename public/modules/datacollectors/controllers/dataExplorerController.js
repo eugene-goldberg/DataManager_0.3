@@ -78,8 +78,6 @@ angular.module('datacollectors').controller('dataExplorerController', ['$scope',
 
                         $scope.dataVersionValues.push({name: version});
                     });
-
-                    //console.log(propValue.dataVersions);
                 }
             }).error(function(){
                 alert('error');
@@ -89,7 +87,6 @@ angular.module('datacollectors').controller('dataExplorerController', ['$scope',
         $scope.getSelectedDataVersion = function(data){
             console.log('Selected data version is:  ' + data.name);
             selectedDataVersion = data.name;
-
         };
 
         $scope.getData = function() {
@@ -116,17 +113,6 @@ angular.module('datacollectors').controller('dataExplorerController', ['$scope',
             });
         };
 
-        //getData();
-
-      //  $scope.people = [
-      //  { 'Line #' : '68' , 'Region' : 'Central & SW Europe' , 'Data Center' : 'Uentrop DC (Dupont)' , 'Address' : 'DuPont (Hamm-Uentrop)\r\nFrielinghauser Straße 5\r\n59071 Hamm\r\nGermany' , 'Type' : 'Client Owned/Leased' , 'Lease Expiration' : 'N/A' , 'DCM Lead' : 'Simon Douthwaite' },
-      //  { 'Line #' : '69' , 'Region' : 'LATAM' , 'Data Center' : 'BT Colo (Alstom)' , 'Address' : 'Sao Paulo, Brazil' , 'Type' : 'CSC CoLo Client Specific' , 'Lease Expiration' : 'Jun-2020' , 'DCM Lead' : 'Scott Margolin' },
-      //  { 'Line #' : '70' , 'Region' : 'Netherlands' , 'Data Center' : 'Telecity (TCG/TC3)' , 'Address' : 'Gyroscoppweg 2e-2f, 1042 AB Amsterdam' , 'Type' : 'CSC CoLo Multi Client' , 'Lease Expiration' : 'Nov-2015' , 'DCM Lead' : 'Simon Douthwaite'}
-      //
-      //
-      //];
-
-        //$scope.people = getData();
         console.log('$scope.people:  ' + $scope.people);
 
         function getColumns(){
@@ -186,8 +172,6 @@ angular.module('datacollectors').controller('dataExplorerController', ['$scope',
             selection: {
                 mode: 'multiple'
             }
-            //,
-            //columns:    getColumns()
         }
     }
 ]);

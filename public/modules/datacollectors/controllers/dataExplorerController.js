@@ -137,12 +137,10 @@ angular.module('datacollectors').controller('dataExplorerController', ['$scope',
             },
             grouping: {
                 autoExpandAll: true
-            }
-            ,
+            },
             groupPanel: {
                 visible: true
-            }
-            ,
+            },
             filterRow: {
                 visible: true,
                 applyFilter: 'auto'
@@ -167,8 +165,7 @@ angular.module('datacollectors').controller('dataExplorerController', ['$scope',
             columnChooser:  {
                 enabled: true
 
-            }
-            ,
+            },
             selection: {
                 mode: 'multiple'
             }

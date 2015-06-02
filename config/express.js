@@ -69,7 +69,7 @@ module.exports = function(db) {
 			return filename+Date.now();
 		},
 		onFileUploadStart: function (file) {
-			console.log(file.originalname + ' is starting ...')
+			console.log(file.originalname + ' is starting ...');
 		},
 		onFileUploadComplete: function (file) {
 			console.log(file.fieldname + ' uploaded to  ' + file.path);
@@ -145,11 +145,11 @@ module.exports = function(db) {
 
 				var collection = db.collection('Fixed_Asset_Register');
 
-				collection.distinct('DataFields',(function(err, docs){
+				collection.distinct('DataFields',function(err, docs){
 					console.log('Distinct Data Fields:  ' + docs);
 					distinctDataFields = docs;
 					assert.equal(null, err);
-				}));
+				});
 
 			}
 		});

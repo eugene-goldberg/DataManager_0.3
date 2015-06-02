@@ -44,7 +44,7 @@ angular.module('datacollectors')
                     console.log('Active Workspace id: ' + index);
                     $scope.workspaces.splice(index,1);
                 }
-            })
+            });
         };
     }]);
 

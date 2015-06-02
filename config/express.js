@@ -25,7 +25,7 @@ var fs = require('fs'),
 	path = require('path');
 
 var multer  = require('multer');
-var myParser = require("excel-file-parser");
+var myParser = require('excel-file-parser');
 
 var mongodb = require('mongodb');
 var assert = require('assert');
@@ -79,8 +79,8 @@ module.exports = function(db) {
 	}));
 
 	app.get('/mongodata', function(req, res){
-		console.log("Request Successful");
-		console.log("_parsedUrl.query:  " + req._parsedUrl.query);
+		console.log('Request Successful');
+		console.log('_parsedUrl.query:  ' + req._parsedUrl.query);
 
 		var url_parts = requestUrl.parse(req.url, true);
 		var query = url_parts.query;
@@ -107,8 +107,8 @@ module.exports = function(db) {
 	});
 
 	app.get('/collections_metadata', function(req, res){
-		console.log("Request Successful");
-		console.log("_parsedUrl.query:  " + req._parsedUrl.query);
+		console.log('Request Successful');
+		console.log('_parsedUrl.query:  ' + req._parsedUrl.query);
 
 		MongoClient.connect(url, function (err, db) {
 			if (err) {
@@ -130,8 +130,8 @@ module.exports = function(db) {
 	});
 
 	app.post('/collections_metadata', function(req, res){
-		console.log("Request Successful");
-		console.log("_parsedUrl.query:  " + req._parsedUrl.query);
+		console.log('Request Successful');
+		console.log('_parsedUrl.query:  ' + req._parsedUrl.query);
 
 		MongoClient.connect(url, function (err, db) {
 			if (err) {
@@ -145,7 +145,7 @@ module.exports = function(db) {
 
 				var collection = db.collection('Fixed_Asset_Register');
 
-				collection.distinct("DataFields",(function(err, docs){
+				collection.distinct('DataFields',(function(err, docs){
 					console.log('Distinct Data Fields:  ' + docs);
 					distinctDataFields = docs;
 					assert.equal(null, err);

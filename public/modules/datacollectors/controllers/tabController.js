@@ -1,6 +1,6 @@
 angular.module('datacollectors')
-    .controller("TabController", ['$scope','$http', function ($scope, $http) {
-        console.log("This is TabController");
+    .controller('TabController', ['$scope','$http', function ($scope, $http) {
+        console.log('This is TabController');
         var setAllInactive = function() {
             angular.forEach($scope.workspaces, function(workspace) {
                 workspace.active = false;
@@ -19,15 +19,15 @@ angular.module('datacollectors')
             var id = $scope.workspaces.length + 1;
             $scope.workspaces.push({
                 id: id,
-                name: "Sheet " + id,
+                name: 'Sheet ' + id,
                 active: true
             });
         };
 
         $scope.workspaces =
             [
-                { id: 1, name: "Sheet1" ,active:true  },
-                { id: 2, name: "Sheet2" ,active:false  }
+                { id: 1, name: 'Sheet1' ,active:true  },
+                { id: 2, name: 'Sheet2' ,active:false  }
             ];
 
         $scope.addWorkspace = function () {

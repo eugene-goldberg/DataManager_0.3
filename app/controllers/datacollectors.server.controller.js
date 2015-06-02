@@ -8,7 +8,7 @@ var mongoose = require('mongoose'),
 	Datacollector = mongoose.model('Datacollector'),
 	_ = require('lodash');
 
-var myParser = require("excel-file-parser");
+var myParser = require('excel-file-parser');
 var multer  = require('multer');
 var bodyParser     = require('body-parser');
 
@@ -50,7 +50,7 @@ exports.upload = function(req, res) {
 	myParser.excelFileParser(req.files.file.name, tabname, metadataFields);
 	//if(done==true){
 		console.log(req.files);
-		res.end("File uploaded.");
+		res.end('File uploaded.');
 	//}
 };
 

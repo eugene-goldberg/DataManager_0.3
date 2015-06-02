@@ -169,6 +169,6 @@ angular.module('datacollectors').controller('dataExplorerController', ['$scope',
             selection: {
                 mode: 'multiple'
             }
-        }
+        };
     }
 ]);

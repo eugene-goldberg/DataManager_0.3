@@ -7,33 +7,33 @@ angular.module('datacollectors').controller('dataExplorerController', ['$scope',
 
         $scope.inputCategories = [
             {
-                name: "Cost Source Actuals",
-                collectionName: "Cost_Source_Actuals"
+                name: 'Cost Source Actuals',
+                collectionName: 'Cost_Source_Actuals'
             },
             {
-                name: "Cost Source Budget",
-                collectionName: "Cost_Source_Budget"
+                name: 'Cost Source Budget',
+                collectionName: 'Cost_Source_Budget'
             },
             {
-                name: "Chart of Accounts",
-                collectionName: "Chart_of_Accounts"
+                name: 'Chart of Accounts',
+                collectionName: 'Chart_of_Accounts'
             },
             {
-                name: "Cost Center Master",
-                collectionName: "Cost_Center_Master"
+                name: 'Cost Center Master',
+                collectionName: 'Cost_Center_Master'
             },
             {
-                name: "Headcount by Department Cost Center Labor",
-                collectionName: "Headcount_by_Department_Cost_Center_Labor"
+                name: 'Headcount by Department Cost Center Labor',
+                collectionName: 'Headcount_by_Department_Cost_Center_Labor'
             },
             {
-                name: "Fixed Asset Register",
-                collectionName: "Fixed_Asset_Register"
+                name: 'Fixed Asset Register',
+                collectionName: 'Fixed_Asset_Register'
 
             },
             {
-                name: "Vendors",
-                collectionName: "Vendors"
+                name: 'Vendors',
+                collectionName: 'Vendors'
             }
         ];
 
@@ -82,7 +82,7 @@ angular.module('datacollectors').controller('dataExplorerController', ['$scope',
                     //console.log(propValue.dataVersions);
                 }
             }).error(function(){
-                alert("error");
+                alert('error');
             });
         };
 
@@ -112,16 +112,16 @@ angular.module('datacollectors').controller('dataExplorerController', ['$scope',
                     $scope.collectionDatafields.push({dataField: field, caption: field, visible: false});
                 });
             }).error(function(){
-                alert("error");
+                alert('error');
             });
         };
 
         //getData();
 
       //  $scope.people = [
-      //  { "Line #" : "68" , "Region" : "Central & SW Europe" , "Data Center" : "Uentrop DC (Dupont)" , "Address" : "DuPont (Hamm-Uentrop)\r\nFrielinghauser Straße 5\r\n59071 Hamm\r\nGermany" , "Type" : "Client Owned/Leased" , "Lease Expiration" : "N/A" , "DCM Lead" : "Simon Douthwaite" },
-      //  { "Line #" : "69" , "Region" : "LATAM" , "Data Center" : "BT Colo (Alstom)" , "Address" : "Sao Paulo, Brazil" , "Type" : "CSC CoLo Client Specific" , "Lease Expiration" : "Jun-2020" , "DCM Lead" : "Scott Margolin" },
-      //  { "Line #" : "70" , "Region" : "Netherlands" , "Data Center" : "Telecity (TCG/TC3)" , "Address" : "Gyroscoppweg 2e-2f, 1042 AB Amsterdam" , "Type" : "CSC CoLo Multi Client" , "Lease Expiration" : "Nov-2015" , "DCM Lead" : "Simon Douthwaite"}
+      //  { 'Line #' : '68' , 'Region' : 'Central & SW Europe' , 'Data Center' : 'Uentrop DC (Dupont)' , 'Address' : 'DuPont (Hamm-Uentrop)\r\nFrielinghauser Straße 5\r\n59071 Hamm\r\nGermany' , 'Type' : 'Client Owned/Leased' , 'Lease Expiration' : 'N/A' , 'DCM Lead' : 'Simon Douthwaite' },
+      //  { 'Line #' : '69' , 'Region' : 'LATAM' , 'Data Center' : 'BT Colo (Alstom)' , 'Address' : 'Sao Paulo, Brazil' , 'Type' : 'CSC CoLo Client Specific' , 'Lease Expiration' : 'Jun-2020' , 'DCM Lead' : 'Scott Margolin' },
+      //  { 'Line #' : '70' , 'Region' : 'Netherlands' , 'Data Center' : 'Telecity (TCG/TC3)' , 'Address' : 'Gyroscoppweg 2e-2f, 1042 AB Amsterdam' , 'Type' : 'CSC CoLo Multi Client' , 'Lease Expiration' : 'Nov-2015' , 'DCM Lead' : 'Simon Douthwaite'}
       //
       //
       //];
@@ -159,7 +159,7 @@ angular.module('datacollectors').controller('dataExplorerController', ['$scope',
             ,
             filterRow: {
                 visible: true,
-                applyFilter: "auto"
+                applyFilter: 'auto'
             },
             searchPanel: {
                 visible: true,

@@ -13,37 +13,37 @@ angular.module('datacollectors').controller('FileUploadController',
 
         $scope.inputCategories = [
             {
-                name: "Cost Source Actuals"
+                name: 'Cost Source Actuals'
             },
             {
-                name: "Cost Source Budget"
+                name: 'Cost Source Budget'
             },
             {
-                name: "Chart of Accounts"
+                name: 'Chart of Accounts'
             },
             {
-                name: "Cost Center Master"
+                name: 'Cost Center Master'
             },
             {
-                name: "Headcount by Department Cost Center Labor"
+                name: 'Headcount by Department Cost Center Labor'
             },
             {
-                name: "Fixed Asset Register"
+                name: 'Fixed Asset Register'
             },
             {
-                name: "Vendors"
+                name: 'Vendors'
             }
         ];
 
         $scope.dataVersionValues = [
             {
-                name: "1"
+                name: '1'
             },
             {
-                name: "2"
+                name: '2'
             },
             {
-                name: "3"
+                name: '3'
             }
         ];
 

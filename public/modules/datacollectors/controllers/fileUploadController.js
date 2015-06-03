@@ -48,7 +48,7 @@ angular.module('datacollectors').controller('FileUploadController',
         ];
 
         var uploader = $scope.uploader = new FileUploader({
-            url: 'http://localhost:3000/api/files',
+            url: 'http://localhost:3001/api/files',
             tabName: 'sheet1'
         });
 

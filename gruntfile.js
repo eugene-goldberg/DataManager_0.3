@@ -3,12 +3,12 @@
 module.exports = function(grunt) {
 	// Unified Watch Object
 	var watchFiles = {
-		serverViews: ['app/views/**/*.*'],
-		serverJS: ['gruntfile.js'],
-		clientViews: ['public/modules/**/views/**/*.html'],
-		clientJS: ['public/js/*.js'],
-		clientCSS: ['public/modules/**/*.css'],
-		mochaTests: ['app/tests/**/*.js']
+		serverViews: [],
+		serverJS: [],
+		clientViews: [],
+		clientJS: [],
+		clientCSS: [],
+		mochaTests: []
 	};
 
 
@@ -114,8 +114,8 @@ module.exports = function(grunt) {
 			}
 		},
 		concurrent: {
-			default: ['nodemon', 'watch'],
-			debug: ['nodemon', 'watch', 'node-inspector'],
+			default: ['nodemon'],
+			debug: ['nodemon'],
 			options: {
 				logConcurrentOutput: true,
 				limit: 10

@@ -31,7 +31,7 @@ var mongodb = require('mongodb');
 var assert = require('assert');
 var MongoClient = mongodb.MongoClient;
 
-var url = 'mongodb://127.0.0.1:27017/datamanager-02-dev';
+var url = 'mongodb://localhost/datamanager-03-test';
 
 module.exports = function(db) {
 	// Initialize express app

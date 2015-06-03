@@ -31,6 +31,16 @@ angular.module('datacollectors').controller('FileUploadController',
                 name: 'Fixed Asset Register'
             },
             {
+                name: 'AccountView Inventory',
+                collectionName: 'AccountView_Inventory'
+
+            },
+            {
+                name: 'DC Inventory',
+                collectionName: 'DC_Inventory'
+
+            },
+            {
                 name: 'Vendors'
             }
         ];
@@ -60,13 +70,13 @@ angular.module('datacollectors').controller('FileUploadController',
         });
 
         uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
-            console.info('onWhenAddingFileFailed', item, filter, options);
+            //console.info('onWhenAddingFileFailed', item, filter, options);
         };
         uploader.onAfterAddingFile = function(fileItem) {
-            console.info('onAfterAddingFile', fileItem);
+            //console.info('onAfterAddingFile', fileItem);
         };
         uploader.onAfterAddingAll = function(addedFileItems) {
-            console.info('onAfterAddingAll', addedFileItems);
+            //console.info('onAfterAddingAll', addedFileItems);
         };
         uploader.onBeforeUploadItem = function(item) {
             angular.forEach( $scope.outputCategories, function( value, key ) {

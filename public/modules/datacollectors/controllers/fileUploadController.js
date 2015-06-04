@@ -26,7 +26,7 @@ angular.module('datacollectors').controller('FileUploadController',
                      url = 'http://dctool-lnx.cloudapp.net:3001/api/files';
 
                 }
-                if(response.environment === 'dev'){
+                if(response.environment === 'development'){
                   url = 'http://localhost:3000/api/files';
 
                     initUploader(url);
@@ -111,15 +111,6 @@ angular.module('datacollectors').controller('FileUploadController',
 
         getEnvironment();
 
-
-        //function runUploader(){
-        //    var uploader = $scope.uploader = new FileUploader({
-        //        //url: 'http://dctool-lnx.cloudapp.net:3001/api/files',
-        //        url:    getEnvironment,
-        //        tabName: 'sheet1'
-        //    });
-        //}
-
         var selectedCategory;
         var selectedDataVersion;
 
@@ -168,79 +159,5 @@ angular.module('datacollectors').controller('FileUploadController',
                 name: '3'
             }
         ];
-
-        //    uploader = $scope.uploader = new FileUploader({
-        //    //url: 'http://dctool-lnx.cloudapp.net:3001/api/files',
-        //    url:    url,
-        //    tabName: 'sheet1'
-        //});
-        //
-        //uploader.filters.push({
-        //    name: 'customFilter',
-        //    fn: function(item /*{File|FileLikeObject}*/, options) {
-        //        return this.queue.length < 10;
-        //    }
-        //});
-
-        //uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
-        //    //console.info('onWhenAddingFileFailed', item, filter, options);
-        //};
-        //uploader.onAfterAddingFile = function(fileItem) {
-        //    //console.info('onAfterAddingFile', fileItem);
-        //    this.url = url;
-        //    console.log('uploader.url is:  ' + url);
-        //};
-        //uploader.onAfterAddingAll = function(addedFileItems) {
-        //    //console.info('onAfterAddingAll', addedFileItems);
-        //};
-        //uploader.onBeforeUploadItem = function(item) {
-        //    angular.forEach( $scope.outputCategories, function( value, key ) {
-        //        selectedCategory = value.name;
-        //        item.formData.push({subjectCategory: selectedCategory});
-        //    });
-        //    angular.forEach( $scope.outputDataVersions, function( value, key ) {
-        //        selectedDataVersion = value.name;
-        //        item.formData.push({dataVersion: selectedDataVersion});
-        //    });
-        //
-        //    item.formData.push({
-        //        tabName: $scope.workspace.name,
-        //        originalDocumentName: $scope.originalDocumentName,
-        //        subject:    $scope.subject,
-        //        documentAuthor: $scope.documentAuthor,
-        //        dateDocumentProduced: $scope.dateDocumentProduced,
-        //        dateDocumentReceived: $scope.dateDocumentReceived,
-        //        documentSubmitter: $scope.documentSubmitter,
-        //        documentReviewer:   $scope.documentReviewer,
-        //        originalSource: $scope.originalSource,
-        //        dataFields: $scope.dataFields
-        //    });
-        //    console.info('onBeforeUploadItem', item);
-        //};
-        //uploader.onProgressItem = function(fileItem, progress) {
-        //    //console.info('onProgressItem', fileItem, progress);
-        //};
-        //uploader.onProgressAll = function(progress) {
-        //    //console.info('onProgressAll', progress);
-        //};
-        //uploader.onSuccessItem = function(fileItem, response, status, headers) {
-        //    //console.info('onSuccessItem', fileItem, response, status, headers);
-        //};
-        //uploader.onErrorItem = function(fileItem, response, status, headers) {
-        //   // console.info('onErrorItem', fileItem, response, status, headers);
-        //    alert('UPLOAD ERROR!!!')
-        //};
-        //uploader.onCancelItem = function(fileItem, response, status, headers) {
-        //    //console.info('onCancelItem', fileItem, response, status, headers);
-        //};
-        //uploader.onCompleteItem = function(fileItem, response, status, headers) {
-        //    //console.info('onCompleteItem', fileItem, response, status, headers);
-        //};
-        //uploader.onCompleteAll = function() {
-        //    console.info('onCompleteAll');
-        //
-        //};
-
-        //console.info('uploader', uploader);
     }
 ]);

@@ -108,7 +108,9 @@ module.exports = function(db) {
 
 	app.get('/environment', function(req, res){
 
-		res.send({environment: 'dev'});
+		var env = process.env.NODE_ENV;
+
+		res.send({environment: env});
 	});
 
 	app.get('/collections_metadata', function(req, res){

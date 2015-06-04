@@ -24,6 +24,7 @@ angular.module('datacollectors').controller('FileUploadController',
 
                 if(response.environment === 'test'){
                      url = 'http://dctool-lnx.cloudapp.net:3001/api/files';
+                    initUploader(url);
 
                 }
                 if(response.environment === 'development'){

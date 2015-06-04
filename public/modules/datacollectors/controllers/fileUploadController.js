@@ -8,7 +8,7 @@ angular.module('datacollectors').controller('FileUploadController',
 
         $scope.uploadUrl = '';
 
-        var url;
+        var url = 'http://dctool-lnx.cloudapp.net:3001/api/files';
 
         var uploader = $scope.uploader = new FileUploader({
             //url: 'http://dctool-lnx.cloudapp.net:3001/api/files',

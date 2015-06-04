@@ -139,8 +139,23 @@ angular.module('datacollectors').controller('FileUploadController',
 
             },
             {
-                name: 'DC Inventory',
-                collectionName: 'DC_Inventory'
+                name: 'DC Facilities',
+                collectionName: 'DC_Facilities'
+
+            },
+            {
+                name: 'GL accounts',
+                collectionName: 'GL_accounts'
+
+            },
+            {
+                name: 'NextGen data',
+                collectionName: 'NextGen_data'
+
+            },
+            {
+                name: 'Profit and Loss data',
+                collectionName: 'Profit_and_Loss_data'
 
             },
             {

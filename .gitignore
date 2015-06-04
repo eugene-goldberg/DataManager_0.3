@@ -10,3 +10,5 @@ config/env/test.js
 config/env/production.js
 config/env/secure.js
 uploads
+dummyPaging.js
+node_modules/forever-monitor/

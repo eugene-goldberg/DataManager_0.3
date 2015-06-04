@@ -110,6 +110,8 @@ module.exports = function(db) {
 
 		var env = process.env.NODE_ENV;
 
+		console.log('OUR ENVIRONMENT IS:  ' + env);
+
 		res.send({environment: env});
 	});
 

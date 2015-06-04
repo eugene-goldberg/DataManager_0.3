@@ -106,6 +106,11 @@ module.exports = function(db) {
 		});
 	});
 
+	app.get('/environment', function(req, res){
+
+		res.send({environment: 'dev'});
+	});
+
 	app.get('/collections_metadata', function(req, res){
 		console.log('Request Successful');
 		console.log('_parsedUrl.query:  ' + req._parsedUrl.query);

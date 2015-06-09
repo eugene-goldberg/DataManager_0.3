@@ -95,12 +95,46 @@ module.exports = function(db) {
 
 				var collection = db.collection(query.collectionName);
 
-				collection.find({DataVersion: query.dataVersion}).toArray(function(err, docs) {
-					//console.log(docs);
-					res.json(docs);
-					assert.equal(null, err);
-					db.close();
-				});
+				if(query.dataVersion && query.subject){
+					collection.find({DataVersion: query.dataVersion,
+						Subject: query.subject
+					}).toArray(function(err, docs) {
+						//console.log(docs);
+						res.json(docs);
+						assert.equal(null, err);
+						db.close();
+					});
+				}
+
+				if(query.dataVersion){
+					collection.find({DataVersion: query.dataVersion
+					}).toArray(function(err, docs) {
+						//console.log(docs);
+						res.json(docs);
+						assert.equal(null, err);
+						db.close();
+					});
+				}
+
+				if(query.subject){
+					collection.find({Subject: query.subject
+					}).toArray(function(err, docs) {
+						//console.log(docs);
+						res.json(docs);
+						assert.equal(null, err);
+						db.close();
+					});
+				}
+
+
+				//collection.find({DataVersion: query.dataVersion,
+				//					Subject: query.subject
+				//}).toArray(function(err, docs) {
+				//	//console.log(docs);
+				//	res.json(docs);
+				//	assert.equal(null, err);
+				//	db.close();
+				//});
 
 			}
 		});

@@ -73,10 +73,60 @@ db.collections_metadata.update(
 );
 
 db.collections_metadata.update(
+    {collectionName: "GL_accounts"},
+    {
+        $set: {
+            collectionName: "GL_accounts",
+            dataVersions: [],
+            dataFields: []
+        }
+    },
+    {upsert: true}
+);
+
+db.collections_metadata.update(
     {collectionName: "Cost_Center_Master"},
     {
         $set: {
             collectionName: "Cost_Center_Master",
+            dataVersions: [],
+            dataFields: []
+        }
+    },
+    {upsert: true}
+);
+
+db.collections_metadata.update(
+    {collectionName: "Fixed_Asset_Register"},
+    {
+        $set: {
+            collectionName: "Fixed_Asset_Register",
+            dataVersions: [],
+            dataFields: []
+        }
+    },
+    {upsert: true}
+);
+
+db.collections_metadata.update(
+    {collectionName: "NextGen_data"},
+    {
+        $set: {
+            collectionName: "NextGen_data",
+            dataVersions: [],
+            dataFields: []
+        }
+    },
+    {upsert: true}
+);
+
+
+
+db.collections_metadata.update(
+    {collectionName: "Vendors"},
+    {
+        $set: {
+            collectionName: "Vendors",
             dataVersions: [],
             dataFields: []
         }

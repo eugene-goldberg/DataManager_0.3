@@ -83,6 +83,7 @@ angular.module('datacollectors').controller('FileUploadController',
                     dataFields: $scope.dataFields
                 });
                 console.info('onBeforeUploadItem', item);
+                console.info('contentType:  ', $scope.contentType);
             };
 
             uploader.onProgressItem = function(fileItem, progress) {

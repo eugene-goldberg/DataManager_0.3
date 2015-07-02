@@ -9,14 +9,34 @@ angular.module('datacollectors').config(['$stateProvider',
 			url: '/datacollectors',
 				templateUrl: 'modules/datacollectors/views/show-datacollector.client.view.html'
 		}).
+			state('sfupdate', {
+				url: '/sfupdate',
+				templateUrl: 'modules/datacollectors/views/salesforce-update.client.view.html'
+			}).
+            state('internal-demand', {
+                url: '/internal-demand',
+                templateUrl: 'modules/datacollectors/views/internal-dc-demand.client.view.html'
+            }).
+            state('dcupdate', {
+                url: '/dcupdate',
+                templateUrl: 'modules/datacollectors/views/dcupdate.client.view.html'
+            }).
+            state('playcard', {
+                url: '/playcard',
+                templateUrl: 'modules/datacollectors/views/playcard.client.view.html'
+            }).
+            state('dashboard', {
+                url: '/dashboard',
+                templateUrl: 'modules/datacollectors/views/dashboard.client.view.html'
+            }).
 			state('dataexplorer', {
 				url: '/dataexplorer',
 				templateUrl: 'modules/datacollectors/views/dataexplorer.client.view.html'
 			}).
-			state('charts', {
-				url: '/charts',
-				templateUrl: 'modules/datacollectors/views/charts.client.view.html'
-			}).
+			//state('charts', {
+			//	url: '/charts',
+			//	templateUrl: 'modules/datacollectors/views/charts.client.view.html'
+			//}).
 		state('createDatacollector', {
 			url: '/datacollectors/create',
 			templateUrl: 'modules/datacollectors/views/create-datacollector.client.view.html'

@@ -17,11 +17,11 @@ module.exports = {
 				//'public/lib/bootstrap/dist/css/bootstrap.css',
 				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
 				'public/modules/datacollectors/css/isteven-multi-select.css',
-				'http://cdn3.devexpress.com/jslib/14.1.8/css/dx.common.css',
-				'http://cdn3.devexpress.com/jslib/14.1.8/css/dx.light.css'
+				'http://cdn3.devexpress.com/jslib/15.1.4/css/dx.common.css',
+				'http://cdn3.devexpress.com/jslib/15.1.4/css/dx.light.css'
 			],
 			js: [
-				'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js',
+				'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js',
 				'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular.min.js',
 				'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular-resource.js',
 				'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular-cookies.js',
@@ -37,7 +37,7 @@ module.exports = {
 				'public/lib/angular-bootstrap/ui-bootstrap.js',
 				'public/lib/isteven-multi-select.js',
 
-				'http://cdn3.devexpress.com/jslib/14.1.8/js/dx.all.js'
+				'http://cdn3.devexpress.com/jslib/15.1.4/js/dx.all.js'
 
 			]
 		},

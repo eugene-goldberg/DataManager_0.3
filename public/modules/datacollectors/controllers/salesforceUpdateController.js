@@ -261,16 +261,16 @@ angular.module('datacollectors').controller('SalesforceUpdateController',
                 if(newValue[0]){
                     $scope.$parent.selectedName = newValue[0].name;
                     if($scope.selectedOpportunity){
-                        if($scope.selectedOpportunity[0].name){
-                            getDataCenterDetail($scope.selectedOpportunity[0].name,newValue[0].name);
+                        if($scope.selectedOpportunity.length > 0){
+                            if($scope.selectedOpportunity[0].name){
+                                getDataCenterDetail($scope.selectedOpportunity[0].name,newValue[0].name);
+                            }
+                            else {
+                                getDataCenterDetail($scope.selectedOpportunityId,newValue[0].name);
+                            }
                         }
-                        else {
-                            getDataCenterDetail($scope.selectedOpportunityId,newValue[0].name);
-                        }
-
                     }
                 }
-
             }
         );
 

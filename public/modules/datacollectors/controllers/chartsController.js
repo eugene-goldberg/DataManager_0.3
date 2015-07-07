@@ -1066,7 +1066,8 @@ angular.module('datacollectors').controller('chartsController', ['$scope', '$htt
 
         $scope.pivotGridOptions = {
             dataSource: {
-                store: orders,
+                store: orders
+                ,
                 fields: [
                     { area: 'column', dataField: 'RequestDate', dataType: 'date', groupInterval: 'year' },
                     { area: 'column', dataField: 'RequestDate', dataType: 'date', groupInterval: 'quarter' },
@@ -1076,6 +1077,10 @@ angular.module('datacollectors').controller('chartsController', ['$scope', '$htt
                     { area: 'row', dataField: 'DcName' },
                     { area: 'data', summaryType: 'count' }
                 ]
+            },
+            fieldChooser: {
+                enabled: true,
+                show: true
             }
         };
     }

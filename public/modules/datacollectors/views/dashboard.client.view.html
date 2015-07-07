@@ -17,10 +17,16 @@
                     <div class="col-sm-offset-4">
                         <h4>DC kW/L Demand by Region</h4>
                     </div>
-                    <div dx-pivot-grid="pivotGridOptions">
+                    <div id="pivotGrid" dx-pivot-grid="pivotGridOptions">
                     </div>
                 </div>
             </div>
+
+            <!--<div class="row">-->
+                <!--<div dx-pivot-grid-field-chooser="{ dataSource: $('#pivotGrid').dxPivotGrid().getDataSource() }">-->
+
+                <!--</div>-->
+            <!--</div>-->
 
             <div class="row">
                 <br>
@@ -31,6 +37,7 @@
 
                 </div>
             </div>
+
         </div>
     </div>
 

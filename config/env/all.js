@@ -21,7 +21,7 @@ module.exports = {
 				'http://cdn3.devexpress.com/jslib/15.1.4/css/dx.light.css'
 			],
 			js: [
-				'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js',
+				'public/lib/jquery/dist/jquery.min.js',
 				'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular.min.js',
 				'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular-resource.js',
 				'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular-cookies.js',

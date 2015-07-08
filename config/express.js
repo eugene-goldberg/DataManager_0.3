@@ -231,13 +231,56 @@ module.exports = function(db) {
 
     app.get('/users', function(req,res){
         MongoClient.connect(url, function (err, db) {
+            var users = [];
+
             if (err) {
                 console.log('Unable to connect to the mongoDB server. Error:', err);
             } else {
                 var collection = db.collection('users');
                 collection.find({}).toArray(function(err, docs) {
+                    docs.forEach(function(user){
+                        var roles;
+                        user.roles.forEach(function(role){
+
+                            if(roles !== undefined){
+                                roles = roles + ',' + role;
+                            }
+                            else {
+                                roles = role;
+                            }
+
+                        });
+                        users.push(
+                            {
+                                FirstName:user.firstName,
+                                LastName:user.lastName,
+                                DisplayName:user.displayName,
+                                Email:user.email,
+                                Roles:roles
+                            }
+                        );
+                    });
+                    res.json(users);
+                });
+
+
+            }
+        });
+    });
+
+    app.get('/roles', function(req,res){
+        MongoClient.connect(url, function (err, db) {
+            var users = [];
+
+            if (err) {
+                console.log('Unable to connect to the mongoDB server. Error:', err);
+            } else {
+                var collection = db.collection('roles');
+                collection.find({},{_id:0}).toArray(function(err, docs) {
                     res.json(docs);
                 });
+
+
             }
         });
     });
@@ -997,11 +1040,30 @@ module.exports = function(db) {
                 console.log('req.body.kwRequired_2016}', req.body.kwRequired_2016);
                 var collection = db.collection('PlaycardsData');
                 var translatedValue = translateToString(req.body.StrategicNaturesOfDc);
+                var keyAccounts;
+                req.body.KeyAccounts.forEach(function(account){
+                   if(keyAccounts !== undefined){
+                       keyAccounts = keyAccounts + ',' + account;
+                   }
+                    else {
+                       keyAccounts = account;
+                   }
+                });
+
+                var consolidationStrategy;
+                req.body.ConsolidationStrategy.forEach(function(strategy){
+                    if(consolidationStrategy !== undefined){
+                        consolidationStrategy = consolidationStrategy + ',' + strategy;
+                    }
+                    else {
+                        consolidationStrategy = strategy;
+                    }
+                });
                 var p = translatedValue;
 
                 collection.update(
                     {
-                        DataCenterName: req.body.DataCenterName
+                        DataCenterName: req.body.DataCenterName[0].name
                     },
                     {$set:
                     {
@@ -1011,7 +1073,7 @@ module.exports = function(db) {
                         DataCenterTypes: translateToString(req.body.DataCenterTypes),
                         TenancyTypes: translateToString(req.body.TenancyTypes),
                         NetworkNodeTypes: translateToString(req.body.NetworkNodeTypes),
-                        KeyAccounts: req.body.KeyAccounts,
+                        KeyAccounts: keyAccounts,
                         SqFtTotal: req.body.SqFtTotal,
                         SqFtRaised: req.body.SqFtRaised,
                         PctUtilization: req.body.PctUtilization,
@@ -1027,7 +1089,7 @@ module.exports = function(db) {
                         DcManager: req.body.DcManager,
                         DcRegionalHead: req.body.DcRegeonalHead,
                         CscSecurityLead: req.body.CscSecurityLead,
-                        ConsolidationStrategy: req.body.ConsolidationStrategy,
+                        ConsolidationStrategy: consolidationStrategy,
                         OverallStrategies: translateToString(req.body.OverallStrategies),
                         Region: translateToString(req.body.Region),
                         BuildDate: req.body.BuildDate,

@@ -2,7 +2,7 @@
 
 module.exports = {
 	app: {
-		title: 'DataManager_0.3',
+		title: 'DataManager 0.5',
 		description: 'Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js',
 		keywords: 'MongoDB, Express, AngularJS, Node.js'
 	},
@@ -36,8 +36,8 @@ module.exports = {
 				'public/lib/angular-file-upload/angular-file-upload.js',
 				'public/lib/angular-bootstrap/ui-bootstrap.js',
 				'public/lib/isteven-multi-select.js',
-
-				'http://cdn3.devexpress.com/jslib/15.1.4/js/dx.all.js'
+				'http://cdn3.devexpress.com/jslib/15.1.4/js/dx.all.js',
+				'public/modules/datacollectors/directives/ng.directives.js'
 
 			]
 		},

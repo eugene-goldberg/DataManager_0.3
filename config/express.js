@@ -229,6 +229,19 @@ module.exports = function(db) {
         });
     });
 
+    app.get('/users', function(req,res){
+        MongoClient.connect(url, function (err, db) {
+            if (err) {
+                console.log('Unable to connect to the mongoDB server. Error:', err);
+            } else {
+                var collection = db.collection('users');
+                collection.find({}).toArray(function(err, docs) {
+                    res.json(docs);
+                });
+            }
+        });
+    });
+
     app.get('/opportunity_ids', function(req, res){
         console.log('opportunity_idsRequest Successful');
         console.log('_parsedUrl.query:  ' + req._parsedUrl.query);

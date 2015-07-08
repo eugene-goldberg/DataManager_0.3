@@ -1,0 +1,60 @@
+<div class="container" id="admin-index" ng-controller="AdminController">
+    <br>
+    <tabset>
+        <tab
+             heading="User Administration"
+             active=workspace.active>
+
+                <form name="form">
+                    <div class="form-group">
+                        <br>
+                        <!--<fieldset>-->
+                            <!--<legend><strong>User Information</strong> </legend>-->
+                            <!--<div class="col-sm-6">-->
+                                <!--<label for="userFirstName">First Name</label>-->
+                                <!--<input id="userFirstName" name="userFirstName" type="text" class="form-control" ng-model="userFirstName"/>-->
+
+                                <!--<label for="userLastName">Last Name</label>-->
+                                <!--<input id="userLastName" name="userLastName" type="text" class="form-control" ng-model="userLastName"/>-->
+                            <!--</div>-->
+
+                            <!--<div class="col-sm-6">-->
+                                <!--<label for="userEmail">Email</label>-->
+                                <!--<input id="userEmail" name="userEmail" type="text" class="form-control" ng-model="userEmail"/>-->
+
+                                <!--<label for="userUserName">User Name</label>-->
+                                <!--<input id="userUserName" name="userUserName" type="text" class="form-control" ng-model="userUserName"/>-->
+
+                                <!--<label for="userRoles">Roles</label>-->
+                                <!--<input id="userRoles" name="userRoles" type="text" class="form-control" ng-model="userRoles"/>-->
+                            <!--</div>-->
+
+                        <!--</fieldset>-->
+                            <div  dx-data-grid="gridOptions"></div>
+                    </div>
+                </form>
+        </tab>
+        <tab>
+            <br>
+            <tab-heading> Application Settings</tab-heading>
+            <form name="role-admin-form">
+                <div class="form-group">
+                    <fieldset>
+                        <legend><strong>Settings</strong> </legend>
+                        <div class="col-sm-6">
+                            <label for="roleName">Setting 1</label>
+                            <input id="roleName" name="roleName" type="text" class="form-control" ng-model="roleName"/>
+
+                            <label for="roleDescription">Setting 2</label>
+                            <input id="roleDescription" name="roleDescription" type="text" class="form-control" ng-model="roleDescription"/>
+                        </div>
+                    </fieldset>
+                </div>
+            </form>
+        </tab>
+        <tab>
+            <tab-heading> Data Backups</tab-heading>
+        </tab>
+    </tabset>
+    <br/>
+</div>

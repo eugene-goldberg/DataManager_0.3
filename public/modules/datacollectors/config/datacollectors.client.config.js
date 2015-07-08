@@ -11,5 +11,8 @@ angular.module('datacollectors').run(['Menus',
         Menus.addSubMenuItem('topbar', 'datacollectors', 'Update Playcards Data', 'update-playcard');
         Menus.addSubMenuItem('topbar', 'datacollectors', 'View Playcards', 'view-playcard');
         Menus.addSubMenuItem('topbar', 'datacollectors', 'DC Demand Dashboard', 'dashboard');
+
+		Menus.addMenuItem('topbar','Admin','admin','dropdown','/admin',true,['admin']);
+        Menus.addSubMenuItem('topbar', 'admin', 'Admin Tasks', 'admin');
 	}
 ]);

@@ -177,17 +177,7 @@
                                     </isteven-multi-select>
                                 </div>
                                 <label for="certifications">Certifications</label>
-                                <div id="certifications">
-                                    <isteven-multi-select
-                                            input-model="certifications"
-                                            output-model="selectedCertifications"
-                                            button-label="icon name"
-                                            item-label="icon name maker"
-                                            tick-property="ticked"
-                                            selection-mode="multi"
-                                            >
-                                    </isteven-multi-select>
-                                </div>
+                                <input id="certifications" name="certifications" type="text" placeholder="csc sec. lead" class="form-control"  ng-model="selectedCertifications"/>
                                 <label for="overallStrategy">Overall Strategy</label>
                                 <div id="overallStrategy">
                                     <isteven-multi-select

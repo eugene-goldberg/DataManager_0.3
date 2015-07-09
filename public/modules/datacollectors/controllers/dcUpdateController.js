@@ -203,15 +203,15 @@ angular.module('datacollectors').controller('DcUpdateController',
                                 $scope.sqFtRaised = data[0].SqFtRaised;
                                 $scope.pctUtilization = data[0].PctUtilization;
 
-                                var selectedCerts = data[0].Certifications.split(',');
+                                $scope.selectedCertifications = data[0].Certifications;
 
-                                selectedCerts.forEach(function(cert){
-                                    $scope.certifications.forEach(function(c){
-                                        if(c.name === cert){
-                                            c.ticked = true;
-                                        }
-                                    })
-                                });
+                                //selectedCerts.forEach(function(cert){
+                                //    $scope.certifications.forEach(function(c){
+                                //        if(c.name === cert){
+                                //            c.ticked = true;
+                                //        }
+                                //    })
+                                //});
 
                             var selectedContracts = data[0].ContractTypes.split(',');
                             if(selectedContracts.length > 0){

@@ -1083,7 +1083,7 @@ module.exports = function(db) {
 
                         AnnualCost: req.body.AnnualCost,
                         KWL: req.body.$kWL,
-                        Certifications: translateToString(req.body.Certifications),
+                        Certifications: req.body.Certifications,
                         DcManager: req.body.DcManager,
                         DcRegionalHead: req.body.DcRegeonalHead,
                         CscSecurityLead: req.body.CscSecurityLead,

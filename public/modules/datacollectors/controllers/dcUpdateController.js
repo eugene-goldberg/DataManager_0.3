@@ -171,15 +171,15 @@ angular.module('datacollectors').controller('DcUpdateController',
                 }).success(function(data){
                         $scope.dcName = data[0].DataCenterName;
                         $scope.dcTier = data[0].DcTier;
-                        //$scope.contractType = data[0].ContractTypes;
+                        $scope.dcSku = data[0].DcTier;
                         $scope.leaseEnds = data[0].LeaseEnds;
-                        $scope.kWlUtil =    data[0].KwLeasedUtilized;
+                        $scope.kwLeasedUtilized =    data[0].KwLeasedUtilized;
                         $scope.annualCost = data[0].AnnualCost;
-                        $scope.$kWl =   data[0].KWL;
-                        //$scope.certifications = data[0].Certifications;
+                        $scope.$kWL =   data[0].KWL;
+                        $scope.cscSecurityLead = data[0].CscSecurityLead;
                         $scope.dcManager =  data[0].DcManager;
-                        $scope.dcSecurityLead = data[0].CscSecurityLead;
-                        $scope.regionalHead =   data[0].DcRegeonalHead;
+                        //$scope.dcSecurityLead = data[0].CscSecurityLead;
+                        $scope.dcRegionalManager =   data[0].DcRegionalHead;
                         $scope.buildDate =  data[0].BuildDate;
                         $scope.vendor = data[0].Vendor;
                         $scope.valueOfUtilization = data[0].ValueOfUtilization;
@@ -191,7 +191,7 @@ angular.module('datacollectors').controller('DcUpdateController',
                         $scope.consolidationStrategy =  data[0].ConsolidationStrategy.split(",");
                         $scope.keyAccounts = data[0].KeyAccounts.split(",");
 
-                        $scope.sqFtTotal =  data[0].SqFtTotal;
+                        $scope.totalSpace =  data[0].SqFtTotal;
                         $scope.sqFtRaised = data[0].SqFtRaised;
                         $scope.pctUtilization = data[0].PctUtilization;
 
@@ -264,7 +264,7 @@ angular.module('datacollectors').controller('DcUpdateController',
                         if(region.name === data[0].Region){
                             region.ticked = true;
                         }
-                    })
+                    });
 
                     var overallStrategies = data[0].OverallStrategies.split(',');
                     if(overallStrategies.length > 0){
@@ -312,7 +312,7 @@ angular.module('datacollectors').controller('DcUpdateController',
                     DataCenterName: $scope.selectedDcName,
                     StrategicNaturesOfDc: $scope.selectedStrategicNatures,
                     AnnualDirectLeaseCost: $scope.annualDirectLeaseCost,
-                    DataCenterTypes: $scope.datacenterTypes,
+                    DataCenterTypes: $scope.selectedDatacenterTypes,
                     TenancyTypes: $scope.selectedTenancyTypes,
                     NetworkNodeTypes: $scope.selectedNetworkNodeTypes,
                     KeyAccounts: $scope.keyAccounts,

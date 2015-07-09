@@ -51,7 +51,7 @@ angular.module('datacollectors').controller('PlaycardController', ['$scope', '$h
                     $scope.playcard.certifications = $scope.playcards[0].Certifications;
                     $scope.playcard.dcManager =  $scope.playcards[0].DcManager;
                     $scope.playcard.dcSecurityLead = $scope.playcards[0].CscSecurityLead;
-                    $scope.playcard.regionalHead =   $scope.playcards[0].DcRegeonalHead;
+                    $scope.playcard.regionalHead =   $scope.playcards[0].DcRegionalHead;
                     $scope.playcard.buildDate =  $scope.playcards[0].BuildDate;
                     $scope.playcard.vendor = $scope.playcards[0].Vendor;
                     $scope.playcard.valueOfUtilization = $scope.playcards[0].ValueOfUtilization;

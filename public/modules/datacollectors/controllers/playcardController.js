@@ -62,6 +62,8 @@ angular.module('datacollectors').controller('PlaycardController', ['$scope', '$h
 
                     $scope.playcard.consolidationStrategy =  $scope.playcards[0].ConsolidationStrategy.split(",");
 
+                    $scope.playcard.overallStrategies = $scope.playcards[0].OverallStrategies.split(",");
+
                     if(data[0].KeyAccounts !== undefined){
                         if(data[0].KeyAccounts.indexOf(',') > 0){
                             $scope.playcard.keyAccounts = data[0].KeyAccounts.split(",");

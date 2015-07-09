@@ -186,7 +186,7 @@ angular.module('datacollectors').controller('DcUpdateController',
                                 $scope.vendor = data[0].Vendor;
                                 $scope.valueOfUtilization = data[0].ValueOfUtilization;
                                 $scope.dcAddress =  data[0].DatacenterAddress;
-                                
+
                                 $scope.dcProvider = data[0].DcProvider;
                                 $scope.dcProviderContact =    data[0].DcProviderContact;
                                 $scope.annualDirectLeaseCost =  data[0].AnnualDirectLeaseCost;
@@ -196,12 +196,7 @@ angular.module('datacollectors').controller('DcUpdateController',
                                 }
 
                             if(data[0].KeyAccounts !== undefined){
-                                if(data[0].KeyAccounts.indexOf(',') > 0){
-                                    $scope.keyAccounts = data[0].KeyAccounts.split(",");
-                                }
-                                else {
                                     $scope.keyAccounts = data[0].KeyAccounts;
-                                }
                             }
 
                                 $scope.totalSpace =  data[0].SqFtTotal;

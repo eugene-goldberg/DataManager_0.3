@@ -1041,24 +1041,29 @@ module.exports = function(db) {
                 var collection = db.collection('PlaycardsData');
                 var translatedValue = translateToString(req.body.StrategicNaturesOfDc);
                 var keyAccounts;
-                req.body.KeyAccounts.forEach(function(account){
-                   if(keyAccounts !== undefined){
-                       keyAccounts = keyAccounts + ',' + account;
-                   }
-                    else {
-                       keyAccounts = account;
-                   }
-                });
+                if(req.body.KeyAccounts !== undefined){
+                    req.body.KeyAccounts.forEach(function(account){
+                        if(keyAccounts !== undefined){
+                            keyAccounts = keyAccounts + ',' + account;
+                        }
+                        else {
+                            keyAccounts = account;
+                        }
+                    });
+                }
+                else {
+                    keyAccounts = '';
+                }
+
 
                 var consolidationStrategy;
-                req.body.ConsolidationStrategy.forEach(function(strategy){
-                    if(consolidationStrategy !== undefined){
-                        consolidationStrategy = consolidationStrategy + ',' + strategy;
-                    }
-                    else {
-                        consolidationStrategy = strategy;
-                    }
-                });
+                if(req.body.ConsolidationStrategy !== undefined){
+                    consolidationStrategy = req.body.ConsolidationStrategy;
+                }
+                else {
+                    consolidationStrategy = '';
+                }
+
                 var p = translatedValue;
 
                 collection.update(

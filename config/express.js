@@ -1042,14 +1042,7 @@ module.exports = function(db) {
                 var translatedValue = translateToString(req.body.StrategicNaturesOfDc);
                 var keyAccounts;
                 if(req.body.KeyAccounts !== undefined){
-                    req.body.KeyAccounts.forEach(function(account){
-                        if(keyAccounts !== undefined){
-                            keyAccounts = keyAccounts + ',' + account;
-                        }
-                        else {
-                            keyAccounts = account;
-                        }
-                    });
+                    keyAccounts = req.body.KeyAccounts;
                 }
                 else {
                     keyAccounts = '';

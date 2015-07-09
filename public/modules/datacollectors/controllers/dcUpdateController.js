@@ -169,118 +169,135 @@ angular.module('datacollectors').controller('DcUpdateController',
                     method: 'GET',
                     url: '/playcards_data/?dcName=' + dcName
                 }).success(function(data){
-                        $scope.dcName = data[0].DataCenterName;
-                        $scope.dcTier = data[0].DcTier;
-                        $scope.dcSku = data[0].DcTier;
-                        $scope.leaseEnds = data[0].LeaseEnds;
-                        $scope.kwLeasedUtilized =    data[0].KwLeasedUtilized;
-                        $scope.annualCost = data[0].AnnualCost;
-                        $scope.$kWL =   data[0].KWL;
-                        $scope.cscSecurityLead = data[0].CscSecurityLead;
-                        $scope.dcManager =  data[0].DcManager;
-                        //$scope.dcSecurityLead = data[0].CscSecurityLead;
-                        $scope.dcRegionalManager =   data[0].DcRegionalHead;
-                        $scope.buildDate =  data[0].BuildDate;
-                        $scope.vendor = data[0].Vendor;
-                        $scope.valueOfUtilization = data[0].ValueOfUtilization;
-                        $scope.dcAddress =  data[0].DatacenterAddress;
-                        $scope.dcProvider = data[0].DcProvider;
-                        $scope.dcProviderContact =    data[0].DcProviderContact;
-                        $scope.annualDirectLeaseCost =  data[0].AnnualDirectLeaseCost;
+                    if(data !== undefined){
+                        if(data[0] !== undefined){
+                                $scope.dcName = data[0].DataCenterName;
+                                $scope.dcTier = data[0].DcTier;
+                                $scope.dcSku = data[0].DcTier;
+                                $scope.leaseEnds = data[0].LeaseEnds;
+                                $scope.kwLeasedUtilized =    data[0].KwLeasedUtilized;
+                                $scope.annualCost = data[0].AnnualCost;
+                                $scope.$kWL =   data[0].KWL;
+                                $scope.cscSecurityLead = data[0].CscSecurityLead;
+                                $scope.dcManager =  data[0].DcManager;
+                                //$scope.dcSecurityLead = data[0].CscSecurityLead;
+                                $scope.dcRegionalManager =   data[0].DcRegionalHead;
+                                $scope.buildDate =  data[0].BuildDate;
+                                $scope.vendor = data[0].Vendor;
+                                $scope.valueOfUtilization = data[0].ValueOfUtilization;
+                                $scope.dcAddress =  data[0].DatacenterAddress;
+                                
+                                $scope.dcProvider = data[0].DcProvider;
+                                $scope.dcProviderContact =    data[0].DcProviderContact;
+                                $scope.annualDirectLeaseCost =  data[0].AnnualDirectLeaseCost;
 
-                        $scope.consolidationStrategy =  data[0].ConsolidationStrategy.split(",");
-                        $scope.keyAccounts = data[0].KeyAccounts.split(",");
-
-                        $scope.totalSpace =  data[0].SqFtTotal;
-                        $scope.sqFtRaised = data[0].SqFtRaised;
-                        $scope.pctUtilization = data[0].PctUtilization;
-
-                        var selectedCerts = data[0].Certifications.split(',');
-
-                        selectedCerts.forEach(function(cert){
-                            $scope.certifications.forEach(function(c){
-                                if(c.name === cert){
-                                    c.ticked = true;
+                                if(data[0].ConsolidationStrategy !== undefined){
+                                    $scope.consolidationStrategy =  data[0].ConsolidationStrategy;
                                 }
-                            })
-                        });
 
-                    var selectedContracts = data[0].ContractTypes.split(',');
-                    if(selectedContracts.length > 0){
-                        selectedContracts.forEach(function(contract){
-                            $scope.contractTypes.forEach(function(c){
-                                if(c.name === contract){
-                                    c.ticked = true;
+                            if(data[0].KeyAccounts !== undefined){
+                                if(data[0].KeyAccounts.indexOf(',') > 0){
+                                    $scope.keyAccounts = data[0].KeyAccounts.split(",");
                                 }
-                            })
-                        });
-                    }
-
-                    var selectedTenancies = data[0].TenancyTypes.split(',');
-                    if(selectedTenancies.length > 0){
-                        selectedTenancies.forEach(function(tenancy){
-                            $scope.tenancyTypes.forEach(function(c){
-                                if(c.name === tenancy){
-                                    c.ticked = true;
+                                else {
+                                    $scope.keyAccounts = data[0].KeyAccounts;
                                 }
-                            })
-                        });
-                    }
+                            }
 
-                    var selectedNetworkNodes = data[0].NetworkNodeTypes.split(',');
-                    if(selectedNetworkNodes.length > 0){
-                        selectedNetworkNodes.forEach(function(node){
-                            $scope.networkNodeTypes.forEach(function(c){
-                                if(c.name === node){
-                                    c.ticked = true;
+                                $scope.totalSpace =  data[0].SqFtTotal;
+                                $scope.sqFtRaised = data[0].SqFtRaised;
+                                $scope.pctUtilization = data[0].PctUtilization;
+
+                                var selectedCerts = data[0].Certifications.split(',');
+
+                                selectedCerts.forEach(function(cert){
+                                    $scope.certifications.forEach(function(c){
+                                        if(c.name === cert){
+                                            c.ticked = true;
+                                        }
+                                    })
+                                });
+
+                            var selectedContracts = data[0].ContractTypes.split(',');
+                            if(selectedContracts.length > 0){
+                                selectedContracts.forEach(function(contract){
+                                    $scope.contractTypes.forEach(function(c){
+                                        if(c.name === contract){
+                                            c.ticked = true;
+                                        }
+                                    })
+                                });
+                            }
+
+                            var selectedTenancies = data[0].TenancyTypes.split(',');
+                            if(selectedTenancies.length > 0){
+                                selectedTenancies.forEach(function(tenancy){
+                                    $scope.tenancyTypes.forEach(function(c){
+                                        if(c.name === tenancy){
+                                            c.ticked = true;
+                                        }
+                                    })
+                                });
+                            }
+
+                            var selectedNetworkNodes = data[0].NetworkNodeTypes.split(',');
+                            if(selectedNetworkNodes.length > 0){
+                                selectedNetworkNodes.forEach(function(node){
+                                    $scope.networkNodeTypes.forEach(function(c){
+                                        if(c.name === node){
+                                            c.ticked = true;
+                                        }
+                                    })
+                                });
+                            }
+
+                            var strategicNatures = data[0].StrategicNaturesOfDc.split(',');
+                            if(strategicNatures.length > 0){
+                                strategicNatures.forEach(function(nature){
+                                    $scope.strategicNatures.forEach(function(c){
+                                        if(c.name === nature){
+                                            c.ticked = true;
+                                        }
+                                    })
+                                });
+                            }
+
+                            var dcTypes = data[0].DataCenterTypes.split(',');
+                            if(dcTypes.length > 0){
+                                dcTypes.forEach(function(dctype){
+                                    $scope.datacenterTypes.forEach(function(c){
+                                        if(c.name === dctype){
+                                            c.ticked = true;
+                                        }
+                                    })
+                                });
+                            }
+
+                            $scope.dcRegions.forEach(function(region){
+                                if(region.name === data[0].Region){
+                                    region.ticked = true;
                                 }
-                            })
-                        });
-                    }
+                            });
 
-                    var strategicNatures = data[0].StrategicNaturesOfDc.split(',');
-                    if(strategicNatures.length > 0){
-                        strategicNatures.forEach(function(nature){
-                            $scope.strategicNatures.forEach(function(c){
-                                if(c.name === nature){
-                                    c.ticked = true;
-                                }
-                            })
-                        });
-                    }
+                            var overallStrategies = data[0].OverallStrategies.split(',');
+                            if(overallStrategies.length > 0){
+                                overallStrategies.forEach(function(strategy){
+                                    $scope.overallStrategies.forEach(function(c){
+                                        if(c.name === strategy){
+                                            c.ticked = true;
+                                        }
+                                    })
+                                });
+                            }
 
-                    var dcTypes = data[0].DataCenterTypes.split(',');
-                    if(dcTypes.length > 0){
-                        dcTypes.forEach(function(dctype){
-                            $scope.datacenterTypes.forEach(function(c){
-                                if(c.name === dctype){
-                                    c.ticked = true;
-                                }
-                            })
-                        });
-                    }
-
-                    $scope.dcRegions.forEach(function(region){
-                        if(region.name === data[0].Region){
-                            region.ticked = true;
                         }
-                    });
-
-                    var overallStrategies = data[0].OverallStrategies.split(',');
-                    if(overallStrategies.length > 0){
-                        overallStrategies.forEach(function(strategy){
-                            $scope.overallStrategies.forEach(function(c){
-                                if(c.name === strategy){
-                                    c.ticked = true;
-                                }
-                            })
-                        });
                     }
-
 
                 }).error(function(){
                     alert('error');
                 });
+
+
             }
 
             $scope.$watch(function(scope) {return  $scope.selectedDcName },

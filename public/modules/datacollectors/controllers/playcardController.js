@@ -61,7 +61,17 @@ angular.module('datacollectors').controller('PlaycardController', ['$scope', '$h
                     $scope.playcard.annualDirectLeaseCost =  $scope.playcards[0].AnnualDirectLeaseCost;
 
                     $scope.playcard.consolidationStrategy =  $scope.playcards[0].ConsolidationStrategy.split(",");
-                    $scope.playcard.keyAccounts = $scope.playcards[0].KeyAccounts.split(",");
+
+                    if(data[0].KeyAccounts !== undefined){
+                        if(data[0].KeyAccounts.indexOf(',') > 0){
+                            $scope.playcard.keyAccounts = data[0].KeyAccounts.split(",");
+                        }
+                        else {
+                            $scope.playcard.keyAccounts = data[0].KeyAccounts;
+                        }
+                    }
+
+                    //$scope.playcard.keyAccounts = $scope.playcards[0].KeyAccounts.split(",");
 
                     $scope.playcard.sqFtTotal =  $scope.playcards[0].SqFtTotal;
                     $scope.playcard.sqFtRaised = $scope.playcards[0].SqFtRaised;

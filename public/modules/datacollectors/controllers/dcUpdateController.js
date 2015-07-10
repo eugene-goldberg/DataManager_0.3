@@ -28,6 +28,9 @@ angular.module('datacollectors').controller('DcUpdateController',
                 },
                 {
                     name: 'EBG'
+                },
+                {
+                    name: 'NPS'
                 }
             ];
 
@@ -37,12 +40,6 @@ angular.module('datacollectors').controller('DcUpdateController',
                 },
                 {
                     name: 'Single'
-                },
-                {
-                    name: 'Cloud'
-                },
-                {
-                    name: 'NPS'
                 }
             ];
 
@@ -109,15 +106,17 @@ angular.module('datacollectors').controller('DcUpdateController',
                     name: "Leased"
                 },
                 {
-                    name: "NPS"
-                },
-                {
                     name:   "Owned"
+                }
+            ];
+
+            $scope.dcTiers = [
+                {
+                    name:   "Critical"
                 },
                 {
-                    name:   "Partner"
+                    name: "Commodity"
                 }
-
             ];
 
             $scope.strategicNatures = [
@@ -159,6 +158,9 @@ angular.module('datacollectors').controller('DcUpdateController',
                 },
                 {
                     name:   "Super-Gain"
+                },
+                {
+                    name: "CGEN"
                 }
             ];
 
@@ -173,7 +175,7 @@ angular.module('datacollectors').controller('DcUpdateController',
                         if(data[0] !== undefined){
                                 $scope.dcName = data[0].DataCenterName;
                                 $scope.dcTier = data[0].DcTier;
-                                $scope.dcSku = data[0].DcTier;
+
                                 $scope.leaseEnds = data[0].LeaseEnds;
                                 $scope.kwLeasedUtilized =    data[0].KwLeasedUtilized;
                                 $scope.annualCost = data[0].AnnualCost;
@@ -190,6 +192,25 @@ angular.module('datacollectors').controller('DcUpdateController',
                                 $scope.dcProvider = data[0].DcProvider;
                                 $scope.dcProviderContact =    data[0].DcProviderContact;
                                 $scope.annualDirectLeaseCost =  data[0].AnnualDirectLeaseCost;
+
+                                $scope.annualTaxBill = data[0].AnnualTaxBill;
+
+                                $scope.contractEndDate = data[0].ContractEndDate;
+
+                                if(data[0].DcTier !== undefined){
+                                    $scope.dcTiers.forEach(function(tier){
+                                        if(tier.name === data[0].DcTier){
+                                            tier.ticked = true;
+                                        }
+                                    })
+                                }
+                            else {
+                                    $scope.dcTiers.forEach(function(tier){
+                                        if(tier.name === 'Critical'){
+                                            tier.ticked = true;
+                                        }
+                                    })
+                                }
 
                                 if(data[0].ConsolidationStrategy !== undefined){
                                     $scope.consolidationStrategy =  data[0].ConsolidationStrategy;
@@ -224,16 +245,12 @@ angular.module('datacollectors').controller('DcUpdateController',
                                 });
                             }
 
-                            var selectedTenancies = data[0].TenancyTypes.split(',');
-                            if(selectedTenancies.length > 0){
-                                selectedTenancies.forEach(function(tenancy){
-                                    $scope.tenancyTypes.forEach(function(c){
-                                        if(c.name === tenancy){
-                                            c.ticked = true;
+
+                                    $scope.tenancyTypes.forEach(function(type){
+                                        if(type.name === data[0].TenancyTypes){
+                                            type.ticked = true;
                                         }
-                                    })
-                                });
-                            }
+                                    });
 
                             var selectedNetworkNodes = data[0].NetworkNodeTypes.split(',');
                             if(selectedNetworkNodes.length > 0){
@@ -285,6 +302,12 @@ angular.module('datacollectors').controller('DcUpdateController',
                                 });
                             }
 
+                            $scope.buList.forEach(function(bu){
+                                if(bu.name === data[0].CscBu){
+                                    bu.ticked = true;
+                                }
+                            })
+
                         }
                     }
 
@@ -331,7 +354,7 @@ angular.module('datacollectors').controller('DcUpdateController',
                     SqFtTotal: $scope.totalSpace,
                     SqFtRaised: $scope.sqFtRaised,
                     PctUtilization: $scope.pctUtilization,
-                    DcTier: $scope.dcSku,
+                    DcTier: $scope.selectedDcTier,
                     ContractTypes: $scope.selectedContractTypes,
                     LeaseEnds: $scope.leaseEnds,
                     KwLeasedUtilized: $scope.kwLeasedUtilized,
@@ -349,7 +372,10 @@ angular.module('datacollectors').controller('DcUpdateController',
                     ValueOfUtilization: $scope.valueOfUtilization,
                     DatacenterAddress:  $scope.dcAddress,
                     DcProvider: $scope.dcProvider,
-                    DcProviderContact:  $scope.dcProviderContact
+                    DcProviderContact:  $scope.dcProviderContact,
+                    AnnualTaxBill: $scope.annualTaxBill,
+                    ContractEndDate: $scope.contractEndDate,
+                    CscBu: $scope.selectedBu
                 };
                 var json = angular.toJson(postData);
                 $http.post('/playcard_update', json)

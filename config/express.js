@@ -1057,7 +1057,25 @@ module.exports = function(db) {
                     consolidationStrategy = '';
                 }
 
-                var p = translatedValue;
+                var cscBu;
+
+                if(req.body.CscBu.length > 0){
+                    cscBu = req.body.CscBu[0].name;
+                }
+                else {
+                    cscBu = '';
+                }
+
+                var tenancyType;
+
+                if(req.body.TenancyTypes !== undefined){
+                    if(req.body.TenancyTypes[0] !== undefined){
+                        tenancyType = req.body.TenancyTypes[0].name;
+                    }
+                }
+                else {
+                    tenancyType = '';
+                }
 
                 collection.update(
                     {
@@ -1069,13 +1087,13 @@ module.exports = function(db) {
                         StrategicNaturesOfDc: translateToString(req.body.StrategicNaturesOfDc),
                         AnnualDirectLeaseCost: req.body.AnnualDirectLeaseCost,
                         DataCenterTypes: translateToString(req.body.DataCenterTypes),
-                        TenancyTypes: translateToString(req.body.TenancyTypes),
-                        NetworkNodeTypes: translateToString(req.body.NetworkNodeTypes),
+                        TenancyTypes: tenancyType,
+                        NetworkNodeTypes: req.body.NetworkNodeTypes[0].name,
                         KeyAccounts: keyAccounts,
                         SqFtTotal: req.body.SqFtTotal,
                         SqFtRaised: req.body.SqFtRaised,
                         PctUtilization: req.body.PctUtilization,
-                        DcTier: req.body.DcTier,
+                        DcTier: req.body.DcTier[0].name,
                         ContractTypes: translateToString(req.body.ContractTypes),
                         LeaseEnds: req.body.LeaseEnds,
                         KwLeasedUtilized: req.body.KwLeasedUtilized,
@@ -1096,7 +1114,10 @@ module.exports = function(db) {
                         DatacenterAddress: req.body.DatacenterAddress,
 
                         DcProvider: req.body.DcProvider,
-                        DcProviderContact: req.body.DcProviderContact
+                        DcProviderContact: req.body.DcProviderContact,
+                        AnnualTaxBill: req.body.AnnualTaxBill,
+                        ContractEndDate: req.body.ContractEndDate,
+                        CscBu: cscBu
                     }
                     },
                     {upsert: true},

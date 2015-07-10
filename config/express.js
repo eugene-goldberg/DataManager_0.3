@@ -1145,6 +1145,62 @@ module.exports = function(db) {
         });
     });
 
+    app.post('/generate_playcards', function(req, res) {
+        console.log('Generate Playcards Request Received');
+        console.log('request body:  ' + req.body);
+
+        MongoClient.connect(url, function (err, db) {
+            if (err) {
+                console.log('Unable to connect to the mongoDB server. Error:', err);
+            } else {
+                console.log('Connection established to', url);
+
+                var collection = db.collection('DcInventory');
+
+                var playcardCollection = db.collection('PlaycardsData');
+
+                collection.find({}).toArray(function (err, docs) {
+                    docs.forEach(function (doc) {
+                        var playcard = {
+                            DataCenterName: doc.DataCenterName,
+                            DcSiteCode: doc.DcSiteCode,
+                            DcAddress: doc.DcAddress,
+                            Region: doc.DcRegion,
+                            DcCountry: doc.DcCountry
+                        };
+                            playcardCollection.update(
+                                {
+                                    DataCenterName: doc.DataCenterName
+                                },
+                                {
+                                    $set:{
+                                        DataCenterName: doc.DataCenterName,
+                                        DcSiteCode: doc.DcSiteCode,
+                                        DcAddress: doc.DcAddress,
+                                        DcRegion: doc.DcRegion,
+                                        DcCountry: doc.DcCountry
+                                    }
+                                },
+                                {upsert: true},
+                                function(err, result) {
+                                    if (err) {
+                                        console.log('err:  ' + err);
+                                    }
+                                    else {
+                                        console.log('update result:  ' + result);
+                                    }
+                                }
+                            );
+                    });
+                    res.send(201);
+                    assert.equal(null, err);
+
+                });
+
+            }
+        });
+    });
+
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: false }));
 

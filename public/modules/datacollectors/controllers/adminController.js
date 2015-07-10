@@ -31,6 +31,16 @@ angular.module('datacollectors').controller('AdminController', ['$scope', '$http
             });
         }
 
+        $scope.generatePlaycardsFromDcInventory = function(){
+            $http.post('/generate_playcards', {})
+                .success(function(data, status, headers, config) {
+
+                }).
+                error(function(data, status, headers, config) {
+                    alert('Error while generating Playcards');
+                });
+        };
+
         getUsers();
         getRoles();
 

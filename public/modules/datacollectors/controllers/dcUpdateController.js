@@ -164,6 +164,51 @@ angular.module('datacollectors').controller('DcUpdateController',
                 }
             ];
 
+            $scope.workloadList = [
+                {
+                    name: 'AS/400'
+                },
+                {
+                    name: 'Biz Cloud'
+                },
+                {
+                    name: 'Biz Cloud HC'
+                },
+                {
+                    name: 'Cloud Compute'
+                },
+                {
+                    name: 'Cyber'
+                },
+                {
+                    name: 'LAN'
+                },
+                {
+                    name: 'Mainframe'
+                },
+                {
+                    name: 'My Workstyle'
+                },
+                {
+                    name: 'Service Management'
+                },
+                {
+                    name: 'Storage as a Service'
+                },
+                {
+                    name: 'UCaaS'
+                },
+                {
+                    name: 'Unix farm'
+                },
+                {
+                    name: 'WAN'
+                },
+                {
+                    name: 'Windows farm'
+                }
+            ];
+
             $scope.selectedDcName=[{}];
 
             function getPlaycardsData(dcName) {
@@ -309,8 +354,18 @@ angular.module('datacollectors').controller('DcUpdateController',
                                 if(bu.name === data[0].CscBu){
                                     bu.ticked = true;
                                 }
-                            })
+                            });
 
+                            var workloads = data[0].Workloads.split(',');
+                            if(workloads.length > 0){
+                                workloads.forEach(function(workload){
+                                    $scope.workloadList.forEach(function(wrk){
+                                        if(wrk.name === workload){
+                                            wrk.ticked = true;
+                                        }
+                                    })
+                                })
+                            }
                         }
                     }
 
@@ -380,7 +435,8 @@ angular.module('datacollectors').controller('DcUpdateController',
                     ContractEndDate: $scope.contractEndDate,
                     CscBu: $scope.selectedBu,
                     SqFtContracted: $scope.sqFtContracted,
-                    SqFtReservedForNewBusiness: $scope.sqFtReservedForNewBusiness
+                    SqFtReservedForNewBusiness: $scope.sqFtReservedForNewBusiness,
+                    Workloads: $scope.selectedWorkloads
                 };
                 var json = angular.toJson(postData);
                 $http.post('/playcard_update', json)

@@ -1119,7 +1119,8 @@ module.exports = function(db) {
                         ContractEndDate: req.body.ContractEndDate,
                         CscBu: cscBu,
                         SqFtContracted: req.body.SqFtContracted,
-                        SqFtReservedForNewBusiness: req.body.SqFtReservedForNewBusiness
+                        SqFtReservedForNewBusiness: req.body.SqFtReservedForNewBusiness,
+                        Workloads: translateToString(req.body.Workloads)
                     }
                     },
                     {upsert: true},

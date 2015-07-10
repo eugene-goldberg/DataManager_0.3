@@ -1077,6 +1077,14 @@ module.exports = function(db) {
                     tenancyType = '';
                 }
 
+                var dcTier;
+                if(req.body.DcTier[0] !== undefined){
+                    dcTier = req.body.DcTier[0].name;
+                }
+                else {
+                    dcTier = '';
+                }
+
                 collection.update(
                     {
                         DataCenterName: req.body.DataCenterName[0].name
@@ -1093,7 +1101,7 @@ module.exports = function(db) {
                         SqFtCapacity: req.body.SqFtCapacity,
                         SqFtRaised: req.body.SqFtRaised,
                         PctUtilization: req.body.PctUtilization,
-                        DcTier: req.body.DcTier[0].name,
+                        DcTier: dcTier,
                         ContractTypes: translateToString(req.body.ContractTypes),
                         LeaseEnds: req.body.LeaseEnds,
                         KwLeasedUtilized: req.body.KwLeasedUtilized,

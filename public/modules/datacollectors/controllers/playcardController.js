@@ -55,7 +55,7 @@ angular.module('datacollectors').controller('PlaycardController', ['$scope', '$h
                     $scope.playcard.buildDate =  $scope.playcards[0].BuildDate;
                     $scope.playcard.vendor = $scope.playcards[0].Vendor;
                     $scope.playcard.valueOfUtilization = $scope.playcards[0].ValueOfUtilization;
-                    $scope.playcard.dcAddress =  $scope.playcards[0].DatacenterAddress;
+                    $scope.playcard.dcAddress =  $scope.playcards[0].DcAddress;
                     $scope.playcard.dcProvider = $scope.playcards[0].DcProvider;
                     $scope.playcard.dcProviderContact =    $scope.playcards[0].DcProviderContact;
                     $scope.playcard.annualDirectLeaseCost =  $scope.playcards[0].AnnualDirectLeaseCost;

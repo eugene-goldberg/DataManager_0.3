@@ -8,11 +8,13 @@ angular.module('datacollectors').controller('DcUpdateController',
 
             console.log('This is dcUpdateController');
 
+            //console.log('selectedDcName: ' + $scope.selectedDcName[0].name);
+
             function initDcList(){
-                $http.get('/mongodata/?collectionName=DC_Facilities&subject=datacenter-listing').success(function(response) {
-                    console.log('found ' + response.length + ' records for datacenter-listing');
+                $http.get('/dc_inventory').success(function(response) {
+                    console.log('found ' + response.length + ' records for dc inventory');
                     response.forEach(function(record){
-                        $scope.dcNames.push({name: record.DataCenterName, country: record.Country, siteCode: record.DCSiteID,sku: record.SKU});
+                        $scope.dcNames.push({name: record.DataCenterName,dcRegion: record.DcRegion, dcAddress:record.DcAddress, country: record.DcCountry, siteCode: record.DcSiteCode});
                     });
                 });
             }
@@ -219,7 +221,10 @@ angular.module('datacollectors').controller('DcUpdateController',
                     if(data !== undefined){
                         if(data[0] !== undefined){
                                 $scope.dcName = data[0].DataCenterName;
-                                $scope.dcTier = data[0].DcTier;
+                                //$scope.dcTier = data[0].DcTier;
+                                //$scope.dcSiteCode = data[0].DcSiteCode;
+                                //$scope.dcAddress = data[0].DcAddress;
+                                //$scope.dcCountry = data[0].DcCountry;
 
                                 $scope.leaseEnds = data[0].LeaseEnds;
                                 $scope.kwLeasedUtilized =    data[0].KwLeasedUtilized;
@@ -232,7 +237,7 @@ angular.module('datacollectors').controller('DcUpdateController',
                                 $scope.buildDate =  data[0].BuildDate;
                                 $scope.vendor = data[0].Vendor;
                                 $scope.valueOfUtilization = data[0].ValueOfUtilization;
-                                $scope.dcAddress =  data[0].DatacenterAddress;
+                                //$scope.dcAddress =  data[0].DatacenterAddress;
 
                                 $scope.dcProvider = data[0].DcProvider;
                                 $scope.dcProviderContact =    data[0].DcProviderContact;
@@ -322,22 +327,25 @@ angular.module('datacollectors').controller('DcUpdateController',
                                 });
                             }
 
-                            var dcTypes = data[0].DataCenterTypes.split(',');
-                            if(dcTypes.length > 0){
-                                dcTypes.forEach(function(dctype){
-                                    $scope.datacenterTypes.forEach(function(c){
-                                        if(c.name === dctype){
-                                            c.ticked = true;
-                                        }
-                                    })
-                                });
+                            if(data[0].DataCenterTypes){
+                                var dcTypes = data[0].DataCenterTypes.split(',');
+                                if(dcTypes.length > 0){
+                                    dcTypes.forEach(function(dctype){
+                                        $scope.datacenterTypes.forEach(function(c){
+                                            if(c.name === dctype){
+                                                c.ticked = true;
+                                            }
+                                        })
+                                    });
+                                }
                             }
 
-                            $scope.dcRegions.forEach(function(region){
-                                if(region.name === data[0].Region){
-                                    region.ticked = true;
-                                }
-                            });
+
+                            //$scope.dcRegions.forEach(function(region){
+                            //    if(region.name === data[0].Region){
+                            //        region.ticked = true;
+                            //    }
+                            //});
 
                             var overallStrategies = data[0].OverallStrategies.split(',');
                             if(overallStrategies.length > 0){
@@ -384,18 +392,33 @@ angular.module('datacollectors').controller('DcUpdateController',
 
                     if(newValue[0]){
                         $scope.$parent.selectedName = newValue[0].name;
+                            $scope.dcCountry=newValue[0].country;
+                            $scope.dcSiteCode = newValue[0].siteCode;
 
-                        //var result = $scope.dcNames.filter(function( obj ) {
-                        //    $scope.dcCountry=newValue[0].country;
-                        //    $scope.dcSiteCode = newValue[0].siteCode;
-                        //    $scope.dcSku = newValue[0].sku;
-                        //    return obj.DataCenterName == newValue[0];
+                            $scope.dcTier = newValue[0].DcTier;
+
+                        var matchingDcRecord = $scope.dcNames.filter(function (entry) { return entry.name === newValue[0].name; });
+
+                        //for(var prop in matchingDcRecord){
+                        //    console.log('matchingRecord prop name: ' + prop + '  prop value: ' + matchingDcRecord[prop]);
+                        //}
                         //
-                        //});
+                        //console.log('matching record[0].dcRegion:  ' + matchingDcRecord[0].dcRegion);
 
-                        getPlaycardsData(newValue[0].name);
+                        if(matchingDcRecord){
+                            if(matchingDcRecord.length > 0){
+                                $scope.dcRegions.forEach(function(region){
+                                    if(region.name === matchingDcRecord[0].dcRegion){
+                                        region.ticked = true;
+                                    }
+                                });
+
+                                $scope.dcAddress = matchingDcRecord[0].dcAddress;
+                            }
+
+                        }
+                            getPlaycardsData(newValue[0].name);
                     }
-
                 }
             );
 
@@ -403,6 +426,11 @@ angular.module('datacollectors').controller('DcUpdateController',
                 console.log('playcard update  ');
                 var postData = {
                     DataCenterName: $scope.selectedDcName,
+                    //DcRegion: $scope.selectedDcRegion,
+                    //DcSiteCode: $scope.dcSiteCode,
+                    //DcAddress: $scope.dcAddress,
+                    //DcCountry: $scope.dcCountry,
+
                     StrategicNaturesOfDc: $scope.selectedStrategicNatures,
                     AnnualDirectLeaseCost: $scope.annualDirectLeaseCost,
                     DataCenterTypes: $scope.selectedDatacenterTypes,
@@ -424,7 +452,7 @@ angular.module('datacollectors').controller('DcUpdateController',
                     CscSecurityLead:    $scope.cscSecurityLead,
                     ConsolidationStrategy:  $scope.consolidationStrategy,
                     OverallStrategies:    $scope.selectedOverallStrategies,
-                    Region: $scope.selectedDcRegion,
+
                     BuildDate:  $scope.buildDate,
                     Vendor: $scope.vendor,
                     ValueOfUtilization: $scope.valueOfUtilization,

@@ -581,6 +581,37 @@ module.exports = function(db) {
         });
     });
 
+    app.get('/dc_inventory', function(req, res){
+        console.log('_parsedUrl.query:  ' + req._parsedUrl.query);
+        MongoClient.connect(url, function (err, db) {
+            if (err) {
+                console.log('Unable to connect to the mongoDB server. Error:', err);
+            } else {
+                console.log('Connection established to', url);
+
+                var collection = db.collection('DcInventory');
+
+                collection.find({}).toArray(function(err, docs) {
+
+                    var dcRecords = [];
+
+                    docs.forEach(function (doc) {
+                        dcRecords.push({
+                            DataCenterName: doc.DataCenterName,
+                            DcSiteCode: doc.DcSiteCode,
+                            DcAddress: doc.DcAddress,
+                            DcRegion: doc.DcRegion,
+                            DcCountry: doc.DcCountry
+                        });
+                    });
+                    res.json(dcRecords);
+                    assert.equal(null, err);
+                    db.close();
+                });
+            }
+        });
+    });
+
     app.get('/salesforce_quote', function(req, res){
         console.log('_parsedUrl.query:  ' + req._parsedUrl.query);
         var file = fs.createReadStream('public/modules/datacollectors/' + req._parsedUrl.query.split('=')[1]);
@@ -1091,7 +1122,7 @@ module.exports = function(db) {
                     },
                     {$set:
                     {
-                        DataCenterName: translateToString(req.body.DataCenterName),
+                        //DataCenterName: translateToString(req.body.DataCenterName),
                         StrategicNaturesOfDc: translateToString(req.body.StrategicNaturesOfDc),
                         AnnualDirectLeaseCost: req.body.AnnualDirectLeaseCost,
                         DataCenterTypes: translateToString(req.body.DataCenterTypes),
@@ -1115,11 +1146,11 @@ module.exports = function(db) {
                         CscSecurityLead: req.body.CscSecurityLead,
                         ConsolidationStrategy: consolidationStrategy,
                         OverallStrategies: translateToString(req.body.OverallStrategies),
-                        Region: translateToString(req.body.Region),
+                        //Region: translateToString(req.body.Region),
                         BuildDate: req.body.BuildDate,
                         Vendor: req.body.Vendor,
                         ValueOfUtilization: req.body.ValueOfUtilization,
-                        DatacenterAddress: req.body.DatacenterAddress,
+                        //DatacenterAddress: req.body.DatacenterAddress,
 
                         DcProvider: req.body.DcProvider,
                         DcProviderContact: req.body.DcProviderContact,

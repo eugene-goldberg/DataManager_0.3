@@ -75,7 +75,7 @@ angular.module('datacollectors').controller('PlaycardController', ['$scope', '$h
 
                     //$scope.playcard.keyAccounts = $scope.playcards[0].KeyAccounts.split(",");
 
-                    $scope.playcard.sqFtTotal =  $scope.playcards[0].SqFtTotal;
+                    $scope.playcard.sqFtCapacity =  $scope.playcards[0].SqFtCapacity;
                     $scope.playcard.sqFtRaised = $scope.playcards[0].SqFtRaised;
                     $scope.playcard.pctUtilization = $scope.playcards[0].PctUtilization;
                 }

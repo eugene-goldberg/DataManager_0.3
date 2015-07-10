@@ -85,8 +85,8 @@
                                 <input id="annualDirectLeaseCost" name="annualDirectLeaseCost" type="text" placeholder="annual cost" class="form-control"  ng-model="annualDirectLeaseCost"/>
                                 <label for="keyAccounts">Key Accounts</label>
                                 <input id="keyAccounts" name="keyAccounts" type="text" placeholder="account-1, account-2" class="form-control"  ng-model="keyAccounts"/>
-                                <label for="totalSpace">Total Space ft</label>
-                                <input id="totalSpace" name="totalSpace" type="text" placeholder="total space" class="form-control" ng-model="totalSpace"/>
+                                <label for="sqFtCapacity">Sq Ft Capacity</label>
+                                <input id="sqFtCapacity" name="sqFtCapacity" type="text" placeholder="sq ft capacity" class="form-control" ng-model="sqFtCapacity"/>
                                 <label for="pctUtilization">% Utilization</label>
                                 <input id="pctUtilization" name="pctUtilization" type="text" placeholder="% utilization" class="form-control"  ng-model="pctUtilization"/>
                                 <label for="tenancyType">Tenancy Type</label>
@@ -145,6 +145,12 @@
 
 
                             <div class="col-sm-3">
+                                <label for="sqFtContracted">Sq Ft Contracted</label>
+                                <input id="sqFtContracted" name="sqFtContracted" type="text" placeholder="sq ft contracted" class="form-control"  ng-model="sqFtContracted"/>
+
+                                <label for="sqFtReservedForNewBusiness">Sq Ft Reserved for new business</label>
+                                <input id="sqFtReservedForNewBusiness" name="sqFtReservedForNewBusiness" type="text" placeholder="reserved" class="form-control"  ng-model="sqFtReservedForNewBusiness"/>
+
                                 <label for="$kWL">$ / kWL</label>
                                 <input id="$kWL" name="$kWL" type="text" placeholder="$ / kW" class="form-control"  ng-model="$kWL"/>
                                 <label for="cscSecurityLead">CSC Security Lead</label>
@@ -206,11 +212,6 @@
 
                             <!--<div class="col-sm-3">-->
                                 <br>
-                                <br>
-                                <br>
-                                <br>
-
-
                                 <input type="submit" id="submit" value="Submit" />
                             </div>
                         </fieldset>

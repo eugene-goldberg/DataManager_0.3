@@ -197,6 +197,9 @@ angular.module('datacollectors').controller('DcUpdateController',
 
                                 $scope.contractEndDate = data[0].ContractEndDate;
 
+                                $scope.sqFtContracted = data[0].SqFtContracted;
+                                $scope.sqFtReservedForNewBusiness = data[0].SqFtReservedForNewBusiness;
+
                                 if(data[0].DcTier !== undefined){
                                     $scope.dcTiers.forEach(function(tier){
                                         if(tier.name === data[0].DcTier){
@@ -220,7 +223,7 @@ angular.module('datacollectors').controller('DcUpdateController',
                                     $scope.keyAccounts = data[0].KeyAccounts;
                             }
 
-                                $scope.totalSpace =  data[0].SqFtTotal;
+                                $scope.sqFtCapacity =  data[0].SqFtCapacity;
                                 $scope.sqFtRaised = data[0].SqFtRaised;
                                 $scope.pctUtilization = data[0].PctUtilization;
 
@@ -351,7 +354,7 @@ angular.module('datacollectors').controller('DcUpdateController',
                     TenancyTypes: $scope.selectedTenancyTypes,
                     NetworkNodeTypes: $scope.selectedNetworkNodeTypes,
                     KeyAccounts: $scope.keyAccounts,
-                    SqFtTotal: $scope.totalSpace,
+                    SqFtCapacity: $scope.sqFtCapacity,
                     SqFtRaised: $scope.sqFtRaised,
                     PctUtilization: $scope.pctUtilization,
                     DcTier: $scope.selectedDcTier,
@@ -375,7 +378,9 @@ angular.module('datacollectors').controller('DcUpdateController',
                     DcProviderContact:  $scope.dcProviderContact,
                     AnnualTaxBill: $scope.annualTaxBill,
                     ContractEndDate: $scope.contractEndDate,
-                    CscBu: $scope.selectedBu
+                    CscBu: $scope.selectedBu,
+                    SqFtContracted: $scope.sqFtContracted,
+                    SqFtReservedForNewBusiness: $scope.sqFtReservedForNewBusiness
                 };
                 var json = angular.toJson(postData);
                 $http.post('/playcard_update', json)

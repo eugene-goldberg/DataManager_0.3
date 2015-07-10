@@ -1090,7 +1090,7 @@ module.exports = function(db) {
                         TenancyTypes: tenancyType,
                         NetworkNodeTypes: req.body.NetworkNodeTypes[0].name,
                         KeyAccounts: keyAccounts,
-                        SqFtTotal: req.body.SqFtTotal,
+                        SqFtCapacity: req.body.SqFtCapacity,
                         SqFtRaised: req.body.SqFtRaised,
                         PctUtilization: req.body.PctUtilization,
                         DcTier: req.body.DcTier[0].name,
@@ -1117,7 +1117,9 @@ module.exports = function(db) {
                         DcProviderContact: req.body.DcProviderContact,
                         AnnualTaxBill: req.body.AnnualTaxBill,
                         ContractEndDate: req.body.ContractEndDate,
-                        CscBu: cscBu
+                        CscBu: cscBu,
+                        SqFtContracted: req.body.SqFtContracted,
+                        SqFtReservedForNewBusiness: req.body.SqFtReservedForNewBusiness
                     }
                     },
                     {upsert: true},

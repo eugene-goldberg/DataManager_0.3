@@ -1118,7 +1118,23 @@ module.exports = function(db) {
 
                 var networkNodeTypes;
                 if(req.body.NetworkNodeTypes[0]){
-                    networkNodeTypes = req.body.NetworkNodeTypes[0].name;
+                    if(req.body.NetworkNodeTypes.length > 1){
+                        req.body.NetworkNodeTypes.forEach(function(type){
+                            if(networkNodeTypes !== undefined){
+                                networkNodeTypes = networkNodeTypes + ',' + type.name;
+                            }
+                            else {
+                                networkNodeTypes = type.name;
+                            }
+
+                            var nnt = networkNodeTypes;
+                        })
+                    }
+                    else {
+                        networkNodeTypes = req.body.NetworkNodeTypes[0].name;
+                    }
+
+                    //networkNodeTypes = req.body.NetworkNodeTypes[0].name;
                 }
                 else {
                     networkNodeTypes = '';

@@ -71,7 +71,7 @@ angular.module('datacollectors').controller('DcUpdateController',
                     name: "Americas"
                 },
                 {
-                    name: "EMEA"
+                    name: "AMEA"
                 },
                 {
                     name: "India "

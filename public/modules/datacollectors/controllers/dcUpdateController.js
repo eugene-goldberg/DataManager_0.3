@@ -308,17 +308,19 @@ angular.module('datacollectors').controller('DcUpdateController',
                                 //        }
                                 //    })
                                 //});
-
-                            var selectedContracts = data[0].ContractTypes.split(',');
-                            if(selectedContracts.length > 0){
-                                selectedContracts.forEach(function(contract){
-                                    $scope.contractTypes.forEach(function(c){
-                                        if(c.name === contract){
-                                            c.ticked = true;
-                                        }
-                                    })
-                                });
+                            if(data[0].ContractTypes !== undefined){
+                                var selectedContracts = data[0].ContractTypes.split(',');
+                                if(selectedContracts.length > 0){
+                                    selectedContracts.forEach(function(contract){
+                                        $scope.contractTypes.forEach(function(c){
+                                            if(c.name === contract){
+                                                c.ticked = true;
+                                            }
+                                        })
+                                    });
+                                }
                             }
+
 
 
                                     $scope.tenancyTypes.forEach(function(type){

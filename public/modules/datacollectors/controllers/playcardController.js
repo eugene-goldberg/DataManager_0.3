@@ -65,12 +65,14 @@ angular.module('datacollectors').controller('PlaycardController', ['$scope', '$h
                     $scope.playcard.overallStrategies = $scope.playcards[0].OverallStrategies.split(",");
 
                     if(data[0].KeyAccounts !== undefined){
-                        if(data[0].KeyAccounts.indexOf(',') > 0){
+                        if(data[0].KeyAccounts.length > 0){
                             $scope.playcard.keyAccounts = data[0].KeyAccounts.split(",");
                         }
                         else {
                             $scope.playcard.keyAccounts = data[0].KeyAccounts;
                         }
+
+                        console.log('playcard.keyAccounts: ' + $scope.playcard.keyAccounts);
                     }
 
                     //$scope.playcard.keyAccounts = $scope.playcards[0].KeyAccounts.split(",");

@@ -1070,6 +1070,7 @@ module.exports = function(db) {
                 console.log('Connection established to', url);
                 console.log('req.body.kwRequired_2016}', req.body.kwRequired_2016);
                 var collection = db.collection('PlaycardsData');
+                var dcInventoryCollection = db.collection('DcInventory');
                 var translatedValue = translateToString(req.body.StrategicNaturesOfDc);
                 var keyAccounts;
                 if(req.body.KeyAccounts !== undefined){
@@ -1140,12 +1141,40 @@ module.exports = function(db) {
                     networkNodeTypes = '';
                 }
 
+                dcInventoryCollection.update(
+                    {
+                        DataCenterName: req.body.DataCenterName[0].name
+                    },
+                    {
+                        $set:
+                        {
+                            DcSiteCode: req.body.DcSiteCode,
+                            DcAddress: req.body.DcAddress,
+                            DcRegion: translateToString(req.body.DcRegion),
+                            DcCountry: req.body.DcCountry
+                        }
+                    },
+                    function(err, result){
+                        if(err){
+                            console.log('DcInventory update err:  ' + err);
+                        }
+                        else{
+                            console.log('DcInventory update result:  ' + result);
+                        }
+                    }
+                );
+
                 collection.update(
                     {
                         DataCenterName: req.body.DataCenterName[0].name
                     },
                     {$set:
                     {
+                        DcSiteCode: req.body.DcSiteCode,
+                        DcAddress: req.body.DcAddress,
+                        DcRegion: translateToString(req.body.DcRegion),
+                        DcCountry: req.body.DcCountry,
+
                         //DataCenterName: translateToString(req.body.DataCenterName),
                         StrategicNaturesOfDc: translateToString(req.body.StrategicNaturesOfDc),
                         AnnualDirectLeaseCost: req.body.AnnualDirectLeaseCost,

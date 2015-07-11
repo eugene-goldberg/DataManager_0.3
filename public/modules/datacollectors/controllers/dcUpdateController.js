@@ -230,10 +230,10 @@ angular.module('datacollectors').controller('DcUpdateController',
                     if(data !== undefined){
                         if(data[0] !== undefined){
                                 $scope.dcName = data[0].DataCenterName;
-                                //$scope.dcTier = data[0].DcTier;
-                                //$scope.dcSiteCode = data[0].DcSiteCode;
-                                //$scope.dcAddress = data[0].DcAddress;
-                                //$scope.dcCountry = data[0].DcCountry;
+                                $scope.dcTier = data[0].DcTier;
+                                $scope.dcSiteCode = data[0].DcSiteCode;
+                                $scope.dcAddress = data[0].DcAddress;
+                                $scope.dcCountry = data[0].DcCountry;
 
                                 $scope.leaseEnds = data[0].LeaseEnds;
                                 $scope.kwLeasedUtilized =    data[0].KwLeasedUtilized;
@@ -450,10 +450,10 @@ angular.module('datacollectors').controller('DcUpdateController',
                 console.log('playcard update  ');
                 var postData = {
                     DataCenterName: $scope.selectedDcName,
-                    //DcRegion: $scope.selectedDcRegion,
-                    //DcSiteCode: $scope.dcSiteCode,
-                    //DcAddress: $scope.dcAddress,
-                    //DcCountry: $scope.dcCountry,
+                    DcRegion: $scope.selectedDcRegion,
+                    DcSiteCode: $scope.dcSiteCode,
+                    DcAddress: $scope.dcAddress,
+                    DcCountry: $scope.dcCountry,
 
                     StrategicNaturesOfDc: $scope.selectedStrategicNatures,
                     AnnualDirectLeaseCost: $scope.annualDirectLeaseCost,

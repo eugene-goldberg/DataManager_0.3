@@ -33,6 +33,10 @@ angular.module('datacollectors').config(['$stateProvider',
 				url: '/dataexplorer',
 				templateUrl: 'modules/datacollectors/views/dataexplorer.client.view.html'
 			}).
+            state('request-access', {
+                url: '/request-access',
+                templateUrl: 'modules/datacollectors/views/access-request-form.html'
+            }).
             state('admin', {
                 url: '/admin',
                 templateUrl: 'modules/datacollectors/views/admin-index.client.view.html'

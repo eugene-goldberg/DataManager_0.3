@@ -294,6 +294,12 @@ angular.module('datacollectors').controller('DcUpdateController',
                 $scope.operationsCost = '';
                 $scope.annualPowerCost = '';
                 $scope.dcOfferingGm = '';
+
+                $scope.consolidationStrategy = '';
+                $scope.sqFtTotal = '';
+                $scope.pctUtilization = '';
+                $scope.sqFtRaised = '';
+                $scope.certifications = '';
             }
 
             function getPlaycardsData(dcName) {

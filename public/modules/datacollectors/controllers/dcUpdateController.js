@@ -222,6 +222,80 @@ angular.module('datacollectors').controller('DcUpdateController',
 
             $scope.selectedDcName=[{}];
 
+            function resetUpdateForm(){
+                $scope.dcNames.forEach(function(dc){
+                    dc.ticked = false;
+                });
+                $scope.dcRegions.forEach(function(region){
+                    region.ticked = false;
+                });
+                $scope.dcTiers.forEach(function(tier){
+                   tier.ticked = false;
+                });
+                $scope.buList.forEach(function(bu){
+                   bu.ticked = false;
+                });
+                $scope.workloadList.forEach(function(workload){
+                   workload.ticked = false;
+                });
+                $scope.tenancyTypes.forEach(function(type){
+                   type.ticked = false;
+                });
+                $scope.contractTypes.forEach(function(type){
+                   type.ticked = false;
+                });
+                $scope.networkNodeTypes.forEach(function(node){
+                   node.ticked = false;
+                });
+                $scope.strategicNatures.forEach(function(nature){
+                   nature.ticked = false;
+                });
+                $scope.datacenterTypes.forEach(function(type){
+                   type.ticked = false;
+                });
+                $scope.overallStrategies.forEach(function(strategy){
+                   strategy.ticked = false;
+                });
+                $scope.dcTier = '';
+                $scope.dcSiteCode = '';
+                $scope.dcAddress = '';
+                $scope.dcCountry = '';
+
+                $scope.leaseEnds = '';
+                $scope.kwLeasedUtilized = '';
+                $scope.annualCost = '';
+                $scope.$kWL = '';
+                $scope.cscSecurityLead = '';
+                $scope.dcManager = '';
+                $scope.dcSecurityLead = '';
+                $scope.dcRegionalManager = '';
+                $scope.buildDate = '';
+                $scope.vendor = '';
+                $scope.valueOfUtilization = '';
+
+                $scope.dcProvider = '';
+                $scope.dcProviderContact = '';
+                $scope.annualDirectLeaseCost = '';
+
+                $scope.annualTaxBill = '';
+
+                $scope.contractEndDate = '';
+
+                $scope.sqFtContracted = '';
+                $scope.sqFtReservedForNewBusiness = '';
+                $scope.keyAccounts = '';
+
+                $scope.sqFtPctContracted = '';
+                $scope.kwCapacity = '';
+                $scope.kwContracted = '';
+                $scope.kwReservedForNewBusiness = '';
+                $scope.kwPctContracted = '';
+                $scope.kw$PerHour = '';
+                $scope.operationsCost = '';
+                $scope.annualPowerCost = '';
+                $scope.dcOfferingGm = '';
+            }
+
             function getPlaycardsData(dcName) {
                 $http({
                     method: 'GET',
@@ -503,7 +577,9 @@ angular.module('datacollectors').controller('DcUpdateController',
                 var json = angular.toJson(postData);
                 $http.post('/playcard_update', json)
                     .success(function(data, status, headers, config) {
-                    $state.go('view-playcard');
+                    //$state.go('view-playcard');
+                        resetUpdateForm();
+                        alert('Playcard update successful');
                 }).
                     error(function(data, status, headers, config) {
                         alert('Error while updating Playcard data');

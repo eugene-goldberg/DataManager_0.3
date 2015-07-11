@@ -1116,6 +1116,14 @@ module.exports = function(db) {
                     dcTier = '';
                 }
 
+                var networkNodeTypes;
+                if(req.body.NetworkNodeTypes[0]){
+                    networkNodeTypes = req.body.NetworkNodeTypes[0].name;
+                }
+                else {
+                    networkNodeTypes = '';
+                }
+
                 collection.update(
                     {
                         DataCenterName: req.body.DataCenterName[0].name
@@ -1127,7 +1135,7 @@ module.exports = function(db) {
                         AnnualDirectLeaseCost: req.body.AnnualDirectLeaseCost,
                         DataCenterTypes: translateToString(req.body.DataCenterTypes),
                         TenancyTypes: tenancyType,
-                        NetworkNodeTypes: req.body.NetworkNodeTypes[0].name,
+                        NetworkNodeTypes: networkNodeTypes,
                         KeyAccounts: keyAccounts,
                         SqFtCapacity: req.body.SqFtCapacity,
                         SqFtRaised: req.body.SqFtRaised,

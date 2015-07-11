@@ -74,13 +74,22 @@ angular.module('datacollectors').controller('DcUpdateController',
                     name: "EMEA"
                 },
                 {
-                    name: "APAC"
+                    name: "India "
                 },
                 {
                     name: "Nordics"
                 },
                 {
-                    name: "UK & I"
+                    name: "UK&I"
+                },
+                {
+                    name: 'Australia & NZ'
+                },
+                {
+                    name: 'SW Europe'
+                },
+                {
+                    name: 'C&E EUROPE'
                 }
             ];
 

@@ -9,6 +9,8 @@ angular.module('datacollectors').controller('AdminController', ['$scope', '$http
 
         $scope.roles;
 
+        $scope.accessRequests;
+
         function getUsers(){
             $http({
                 method: 'GET',
@@ -31,6 +33,17 @@ angular.module('datacollectors').controller('AdminController', ['$scope', '$http
             });
         }
 
+        function getAccessRequests(){
+            $http({
+                method: 'GET',
+                url: '/access_requests_listing'
+            }).success(function(data){
+                $scope.accessRequests = data;
+            }).error(function(){
+                alert('error');
+            });
+        }
+
         $scope.generatePlaycardsFromDcInventory = function(){
             $http.post('/generate_playcards', {})
                 .success(function(data, status, headers, config) {
@@ -43,6 +56,7 @@ angular.module('datacollectors').controller('AdminController', ['$scope', '$http
 
         getUsers();
         getRoles();
+        getAccessRequests();
 
         $scope.usersGridOptions = {
             bindingOptions: {
@@ -88,6 +102,47 @@ angular.module('datacollectors').controller('AdminController', ['$scope', '$http
         $scope.rolesGridOptions = {
             bindingOptions: {
                 dataSource: 'roles',
+                columns: 'collectionDatafields'
+            },
+            grouping: {
+                autoExpandAll: true
+            },
+            groupPanel: {
+                visible: true
+            },
+            filterRow: {
+                visible: true,
+                applyFilter: 'auto'
+            },
+            searchPanel: {
+                visible: true,
+                width: 240,
+                placeholder: 'Search...'
+            },
+            paging: {
+                enabled: true,
+                pageSize: 10
+            },
+            pager: {
+                showPageSizeSelector: true,
+                allowedPageSizes: [5, 10, 20]
+            },
+            rowAlternationEnabled: true,
+            allowColumnReordering: true,
+            allowColumnResizing: true,
+            columnAutoWidth: true,
+            columnChooser:  {
+                enabled: true
+
+            },
+            selection: {
+                mode: 'multiple'
+            }
+        };
+
+        $scope.accessRequestsGridOptions = {
+            bindingOptions: {
+                dataSource: 'accessRequests',
                 columns: 'collectionDatafields'
             },
             grouping: {

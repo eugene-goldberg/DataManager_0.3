@@ -8,31 +8,14 @@
                 <form name="form">
                     <div class="form-group">
                         <br>
-                        <!--<fieldset>-->
-                            <!--<legend><strong>User Information</strong> </legend>-->
-                            <!--<div class="col-sm-6">-->
-                                <!--<label for="userFirstName">First Name</label>-->
-                                <!--<input id="userFirstName" name="userFirstName" type="text" class="form-control" ng-model="userFirstName"/>-->
-
-                                <!--<label for="userLastName">Last Name</label>-->
-                                <!--<input id="userLastName" name="userLastName" type="text" class="form-control" ng-model="userLastName"/>-->
-                            <!--</div>-->
-
-                            <!--<div class="col-sm-6">-->
-                                <!--<label for="userEmail">Email</label>-->
-                                <!--<input id="userEmail" name="userEmail" type="text" class="form-control" ng-model="userEmail"/>-->
-
-                                <!--<label for="userUserName">User Name</label>-->
-                                <!--<input id="userUserName" name="userUserName" type="text" class="form-control" ng-model="userUserName"/>-->
-
-                                <!--<label for="userRoles">Roles</label>-->
-                                <!--<input id="userRoles" name="userRoles" type="text" class="form-control" ng-model="userRoles"/>-->
-                            <!--</div>-->
-
-                        <!--</fieldset>-->
+                        <legend><strong>Users</strong> </legend>
                             <div  dx-data-grid="usersGridOptions"></div>
                                 <br>
+                        <legend><strong>Roles</strong> </legend>
                             <div  dx-data-grid="rolesGridOptions"></div>
+                                <br>
+                        <legend><strong>Access Requests</strong> </legend>
+                            <div  dx-data-grid="accessRequestsGridOptions"></div>
                     </div>
                 </form>
         </tab>

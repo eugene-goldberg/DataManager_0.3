@@ -285,6 +285,22 @@ module.exports = function(db) {
         });
     });
 
+    app.get('/access_requests_listing', function(req,res){
+        console.log('access requests listing is being requested');
+        MongoClient.connect(url, function (err, db) {
+            if (err) {
+                console.log('Unable to connect to the mongoDB server. Error:', err);
+            } else {
+                var collection = db.collection('AccessRequests');
+                collection.find({},{_id:0}).toArray(function(err, docs) {
+                    res.json(docs);
+                });
+
+
+            }
+        });
+    });
+
     app.get('/opportunity_ids', function(req, res){
         console.log('opportunity_idsRequest Successful');
         console.log('_parsedUrl.query:  ' + req._parsedUrl.query);
@@ -1237,6 +1253,45 @@ module.exports = function(db) {
                     });
             }
         });
+    });
+
+    app.post('/access_request', function(req, res) {
+        console.log('Access Request post Received');
+        console.log('request body:  ' + req.body);
+
+        MongoClient.connect(url, function (err, db) {
+            if (err) {
+                console.log('Unable to connect to the mongoDB server. Error:', err);
+            } else {
+
+                var collection = db.collection('AccessRequests');
+
+                collection.update(
+                    {
+                        email: req.body.email
+                    },
+                    {
+                        $set: {
+                            FirstName: req.body.firstName,
+                            LastName: req.body.lastName,
+                            UserName: req.body.username,
+                            Email: req.body.email,
+                            Reason: req.body.reason,
+                            RequestedRoles: req.body.roles
+                        }
+                    },
+                    {upsert: true},
+                    function (err, result) {
+                        if (err) {
+                            console.log('err:  ' + err);
+                        }
+                        else {
+                            console.log('update result:  ' + result);
+                            res.send(201);
+                        }
+                    });
+            }
+        })
     });
 
     app.post('/generate_playcards', function(req, res) {

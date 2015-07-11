@@ -1183,7 +1183,17 @@ module.exports = function(db) {
                         CscBu: cscBu,
                         SqFtContracted: req.body.SqFtContracted,
                         SqFtReservedForNewBusiness: req.body.SqFtReservedForNewBusiness,
-                        Workloads: translateToString(req.body.Workloads)
+                        Workloads: translateToString(req.body.Workloads),
+
+                        SqFtPctContracted:  req.body.SqFtPctContracted,
+                        KwCapacity:   req.body.KwCapacity,
+                        KwContracted:   req.body.KwContracted,
+                        KwReservedForNewBusiness:    req.body.KwReservedForNewBusiness,
+                        KwPctContracted:    req.body.KwPctContracted,
+                        Kw$PerHour:    req.body.Kw$PerHour,
+                        OperationsCost: req.body.OperationsCost,
+                        AnnualPowerCost:    req.body.AnnualPowerCost,
+                        DcOfferingGm:   req.body.DcOfferingGm
                     }
                     },
                     {upsert: true},

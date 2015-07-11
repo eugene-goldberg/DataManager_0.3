@@ -259,6 +259,19 @@ angular.module('datacollectors').controller('DcUpdateController',
                                 $scope.sqFtContracted = data[0].SqFtContracted;
                                 $scope.sqFtReservedForNewBusiness = data[0].SqFtReservedForNewBusiness;
 
+
+                                $scope.sqFtPctContracted = data[0].SqFtPctContracted;
+                                $scope.kwCapacity = data[0].KwCapacity;
+                                $scope.kwContracted = data[0].KwContracted;
+                                $scope.kwReservedForNewBusiness = data[0].KwReservedForNewBusiness;
+                                $scope.kwPctContracted = data[0].KwPctContracted;
+                                $scope.kw$PerHour = data[0].Kw$PerHour;
+                                $scope.operationsCost = data[0].OperationsCost;
+                                $scope.annualPowerCost = data[0].AnnualPowerCost;
+                                $scope.dcOfferingGm = data[0].DcOfferingGm;
+
+
+
                                 if(data[0].DcTier !== undefined){
                                     $scope.dcTiers.forEach(function(tier){
                                         if(tier.name === data[0].DcTier){
@@ -473,7 +486,17 @@ angular.module('datacollectors').controller('DcUpdateController',
                     CscBu: $scope.selectedBu,
                     SqFtContracted: $scope.sqFtContracted,
                     SqFtReservedForNewBusiness: $scope.sqFtReservedForNewBusiness,
-                    Workloads: $scope.selectedWorkloads
+                    Workloads: $scope.selectedWorkloads,
+
+                    SqFtPctContracted:  $scope.sqFtPctContracted,
+                    KwCapacity:   $scope.kwCapacity,
+                    KwContracted:   $scope.kwContracted,
+                    KwReservedForNewBusiness:    $scope.kwReservedForNewBusiness,
+                    KwPctContracted:    $scope.kwPctContracted,
+                    Kw$PerHour:    $scope.kw$PerHour,
+                    OperationsCost: $scope.operationsCost,
+                    AnnualPowerCost:    $scope.annualPowerCost,
+                    DcOfferingGm:   $scope.dcOfferingGm
                 };
                 var json = angular.toJson(postData);
                 $http.post('/playcard_update', json)

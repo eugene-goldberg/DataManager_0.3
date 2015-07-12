@@ -23,7 +23,7 @@ angular.module('datacollectors').config(['$stateProvider',
             }).
             state('view-playcard', {
                 url: '/view-playcard',
-                templateUrl: 'modules/datacollectors/views/view-playcard.client.view.html'
+                templateUrl: 'modules/datacollectors/views/playcard-v2.html'
             }).
             state('dashboard', {
                 url: '/dashboard',

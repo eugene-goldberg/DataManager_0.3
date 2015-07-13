@@ -9,7 +9,7 @@
     <div id="keyAccountsList" style="position: absolute; top: 354px;left: 5px; height: 135px;width: 150px; background-color: #e2e2e2;color: #262626;overflow: scroll;"><ul><li ng-repeat="account in playcard.keyAccounts">{{account}}</li></ul></div>
 
     <div style="position: absolute; top: 493px;left: 5px; height: 20px;width: 150px;background-color: #8c8f91;color: #efefef;text-align: center;vertical-align: middle">Workloads</div>
-    <div id="workloads" style="position: absolute; top: 518px;left: 5px; height: 93px;width: 150px; background-color: #e2e2e2;color: #262626;overflow: scroll;"><ul><li ng-repeat="workload in playcard.workloads">{{workload}}</li></ul></div>
+    <div id="workloads" style="position: absolute; top: 518px;left: 5px; height: 133px;width: 150px; background-color: #e2e2e2;color: #262626;overflow: scroll;"><ul><li ng-repeat="workload in playcard.workloads">{{workload}}</li></ul></div>
 
 
     <div style="position: absolute;top: 140px; left: 160px; height: 77px; width: 65px; background-color: #0b4160;color: #efefef;font-size: 2.0em;text-align: center;"><img ng-src="/modules/core/img/dc-02.png" /></div>
@@ -17,7 +17,7 @@
     <div style="position: absolute;top: 284px; left: 160px; height: 65px; width: 65px; background-color: #6191b9;color: #efefef"><img ng-src="/modules/core/img/lightningBolt-02.png" /></div>
     <div style="position: absolute;top: 354px; left: 160px; height: 78px; width: 65px; background-color: #798968;color: #efefef;"><img style="display: block;margin-left: auto;margin-right: auto" ng-src="/modules/core/img/dollar-2.png" /></div>
     <div style="position: absolute;top: 436px; left: 160px; height: 77px; width: 65px; background-color: #8e9091;color: #efefef"><img ng-src="/modules/core/img/team-01.png" /></div>
-    <div style="position: absolute;top: 517px; left: 160px; height: 93px; width: 65px; background-color: #606164;color: #efefef"><img ng-src="/modules/core/img/push-pin-2.png" /></div>
+    <div style="position: absolute;top: 517px; left: 160px; height: 133px; width: 65px; background-color: #606164;color: #efefef"><img ng-src="/modules/core/img/push-pin-2.png" /></div>
 
     <div style="position: absolute;top: 140px; left: 230px; height: 18px; width: 110px; background-color: #0b4160;color: #efefef;font-size: small">Sq Ft Capacity</div>
     <div style="position: absolute;top: 160px; left: 230px; height: 18px; width: 110px; background-color: #0b4160;color: #efefef;font-size: small">Sq Ft Contracted</div>
@@ -42,12 +42,14 @@
     <div style="position: absolute;top: 476px; left: 230px; height: 18px; width: 107px; background-color: #8e9091;color: #efefef;font-size: small">DC Offering Mgr</div>
     <div style="position: absolute;top: 496px; left: 230px; height: 17px; width: 107px; background-color: #8e9091;color: #efefef;font-size: small">CSC Sec Lead</div>
 
-    <div style="position: absolute;top: 518px; left: 230px; height: 70px; width: 561px; background-color: #e2e2e2;font-size: small"><ul><li ng-repeat="strategy in playcard.consolidationStrategy">{{strategy}}</li></ul></div>
+    <div style="position: absolute;top: 518px; left: 230px; height: 18px; width: 561px; background-color: #b5b5b5;color: #efefef;font-size: small;text-align: center">Consolidation Strategy</div>
 
-    <div style="position: absolute;top: 590px; left: 230px; height: 20px; width: 140px; background-color: #d72b28;color: #efefef;font-size: small;text-align: center">CLOSE</div>
-    <div style="position: absolute;top: 590px; left: 371px; height: 20px; width: 140px; background-color: #821158;color: #efefef;font-size: small;text-align: center">MOVE</div>
-    <div style="position: absolute;top: 590px; left: 512px; height: 20px; width: 140px; background-color: #cbac25;color: #efefef;font-size: small;text-align: center">MAINTAIN</div>
-    <div style="position: absolute;top: 590px; left: 653px; height: 20px; width: 138px; background-color: #83b145;color: #efefef;font-size: small;text-align: center">GROW</div>
+    <div style="position: absolute;top: 538px; left: 230px; height: 90px; width: 561px; background-color: #e2e2e2;font-size: small;overflow: scroll;"><ul><li ng-repeat="strategy in playcard.consolidationStrategy">{{strategy}}</li></ul></div>
+
+    <div style="position: absolute;top: 630px; left: 230px; height: 20px; width: 140px; background-color: #d72b28;color: #efefef;font-size: small;text-align: center">CLOSE</div>
+    <div style="position: absolute;top: 630px; left: 371px; height: 20px; width: 140px; background-color: #821158;color: #efefef;font-size: small;text-align: center">MOVE</div>
+    <div style="position: absolute;top: 630px; left: 512px; height: 20px; width: 140px; background-color: #cbac25;color: #efefef;font-size: small;text-align: center">MAINTAIN</div>
+    <div style="position: absolute;top: 630px; left: 653px; height: 20px; width: 138px; background-color: #83b145;color: #efefef;font-size: small;text-align: center">GROW</div>
 
     <div style="position: absolute;top: 140px; left: 342px; height: 18px; width: 120px; background-color: #0b4160;color: #efefef;font-size: small">{{playcard.sqFtCapacity}}</div>
     <div style="position: absolute;top: 160px; left: 342px; height: 18px; width: 120px; background-color: #0b4160;color: #efefef;font-size: small">{{playcard.sqFtRaised}}</div>

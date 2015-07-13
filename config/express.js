@@ -652,7 +652,7 @@ module.exports = function(db) {
         console.log('Salesforce DC update Request Received');
         console.log('request body:  ' + req.body);
 
-
+        var httpResponse = res;
 
         MongoClient.connect(url, function (err, db) {
             if (err) {
@@ -760,7 +760,6 @@ module.exports = function(db) {
                                     }
                                     else{
                                         console.log('update result:  ' + result);
-
                                         var fileName = 'quote_' + Math.random() + '.pdf';
                                         var html = fs.readFileSync('public/modules/datacollectors/template.html', 'utf8');
 
@@ -793,12 +792,18 @@ module.exports = function(db) {
                                                 electricBudget2025: Math.round((((Number(req.body.kwRequired_2025) * 720) * 12) * 0.09))
                                             });
 
+
+
                                         var options = { filename: 'public/modules/datacollectors/' + fileName, format: 'Letter' };
                                         pdf.create(renderedHtml, options).toFile(function(err, res) {
-                                            if (err) return console.log(err);
-                                            console.log(res);
+                                            if (err){
+                                                console.log(res);
+                                                httpResponse.send(500);
+                                            }
+                                            else {
+                                                httpResponse.send(201,fileName);
+                                            }
                                         });
-                                        res.send(201,fileName);
                                     }
                                 });
                         }
@@ -893,10 +898,14 @@ module.exports = function(db) {
                                             });
                                         var options = { filename: 'public/modules/datacollectors/' + fileName, format: 'Letter' };
                                         pdf.create(renderedHtml, options).toFile(function(err, res) {
-                                            if (err) return console.log(err);
-                                            //console.log(res);
+                                            if (err){
+                                                console.log(res);
+                                                httpResponse.send(500);
+                                            }
+                                            else {
+                                                httpResponse.send(201,fileName);
+                                            }
                                         });
-                                        res.send(201,fileName);
                                     }
                                 });
                         }

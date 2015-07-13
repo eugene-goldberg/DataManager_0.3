@@ -16,6 +16,7 @@ var fs = require('fs'),
 	helmet = require('helmet'),
 	passport = require('passport'),
 	requestUrl = require('url'),
+    ObjectID = require('mongodb').ObjectID,
 	mongoStore = require('connect-mongo')({
 		session: session
 	}),
@@ -661,6 +662,12 @@ module.exports = function(db) {
                 var collection = db.collection('SalesforceData');
                 var matchingRecords;
 
+                var userName;
+                var userCollection = db.collection('users');
+                userCollection.find({_id: ObjectID(req.session.passport.user)}).toArray(function(err, docs) {
+                    userName = docs[0].username;
+                });
+
                 collection.update(
                     {
                         CSCOpportunityID: req.body.opportunityId
@@ -767,8 +774,8 @@ module.exports = function(db) {
                                             renderedHtml = tmpl({
                                                 DcName: req.body.dcName,
                                                 OpportunityId:  req.body.opportunityId,
-                                                OpportunityName:  req.body.opportunityName,
-                                                AccountName:    req.body.accountName,
+                                                userName:  userName,
+                                                quoteDate:    new Date().toISOString(),
                                                 kWLeased2016: Math.round(((Number(req.body.kwRequired_2016) * 185) * 12)),
                                                 kWLeased2017: Math.round(((Number(req.body.kwRequired_2017) * 185) * 12)),
                                                 kWLeased2018: Math.round(((Number(req.body.kwRequired_2018) * 185) * 12)),
@@ -794,7 +801,7 @@ module.exports = function(db) {
 
 
 
-                                        var options = { filename: 'public/modules/datacollectors/' + fileName, format: 'Letter' };
+                                        var options = { filename: 'public/modules/datacollectors/' + fileName, format: 'Letter',orientation: 'landscape' };
                                         pdf.create(renderedHtml, options).toFile(function(err, res) {
                                             if (err){
                                                 console.log(res);
@@ -872,8 +879,8 @@ module.exports = function(db) {
                                             renderedHtml = tmpl({
                                                 DcName: req.body.dcName,
                                                 OpportunityId:  req.body.opportunityId,
-                                                OpportunityName:  req.body.opportunityName,
-                                                AccountName:    req.body.accountName,
+                                                userName:  userName,
+                                                quoteDate:    new Date().toISOString(),
                                                 kWLeased2016: Math.round(((Number(req.body.kwRequired_2016) * 185) * 12)),
                                                 kWLeased2017: Math.round(((Number(req.body.kwRequired_2017) * 185) * 12)),
                                                 kWLeased2018: Math.round(((Number(req.body.kwRequired_2018) * 185) * 12)),
@@ -896,7 +903,7 @@ module.exports = function(db) {
                                                 electricBudget2024: Math.round((((Number(req.body.kwRequired_2024) * 720) * 12) * 0.09)),
                                                 electricBudget2025: Math.round((((Number(req.body.kwRequired_2025) * 720) * 12) * 0.09))
                                             });
-                                        var options = { filename: 'public/modules/datacollectors/' + fileName, format: 'Letter' };
+                                        var options = { filename: 'public/modules/datacollectors/' + fileName, format: 'Letter',orientation: 'landscape' };
                                         pdf.create(renderedHtml, options).toFile(function(err, res) {
                                             if (err){
                                                 console.log(res);

@@ -1028,47 +1028,6 @@ module.exports = function(db) {
                             console.log('update result:  ' + result);
 
                             eventEmitter.emit('internalDcDemandUpdateFinishedEvent');
-
-                            //setTimeout(function(){
-                            //    var fileName = 'quote_' + Math.random() + '.pdf';
-                            //    var html = fs.readFileSync('public/modules/datacollectors/template.html', 'utf8');
-                            //
-                            //    var tmpl = swig.compileFile('public/modules/datacollectors/template.html'),
-                            //        renderedHtml = tmpl({
-                            //            DcName: req.body.dcName,
-                            //            OpportunityId:  req.body.opportunityId,
-                            //            OpportunityName:  req.body.opportunityName,
-                            //            AccountName:    req.body.accountName,
-                            //            kWLeased2016: Math.round(((Number(req.body.kwRequired_2016) * 185) * 12)),
-                            //            kWLeased2017: Math.round(((Number(req.body.kwRequired_2017) * 185) * 12)),
-                            //            kWLeased2018: Math.round(((Number(req.body.kwRequired_2018) * 185) * 12)),
-                            //            kWLeased2019: Math.round(((Number(req.body.kwRequired_2019) * 185) * 12)),
-                            //            kWLeased2020: Math.round(((Number(req.body.kwRequired_2020) * 185) * 12)),
-                            //            kWLeased2021: Math.round(((Number(req.body.kwRequired_2021) * 185) * 12)),
-                            //            kWLeased2022: Math.round(((Number(req.body.kwRequired_2022) * 185) * 12)),
-                            //            kWLeased2023: Math.round(((Number(req.body.kwRequired_2023) * 185) * 12)),
-                            //            kWLeased2024: Math.round(((Number(req.body.kwRequired_2024) * 185) * 12)),
-                            //            kWLeased2025: Math.round(((Number(req.body.kwRequired_2025) * 185) * 12)),
-                            //
-                            //            electricBudget2016: Math.round((((Number(req.body.kwRequired_2016) * 720) * 12) * 0.09)),
-                            //            electricBudget2017: Math.round((((Number(req.body.kwRequired_2017) * 720) * 12) * 0.09)),
-                            //            electricBudget2018: Math.round((((Number(req.body.kwRequired_2018) * 720) * 12) * 0.09)),
-                            //            electricBudget2019: Math.round((((Number(req.body.kwRequired_2019) * 720) * 12) * 0.09)),
-                            //            electricBudget2020: Math.round((((Number(req.body.kwRequired_2020) * 720) * 12) * 0.09)),
-                            //            electricBudget2021: Math.round((((Number(req.body.kwRequired_2021) * 720) * 12) * 0.09)),
-                            //            electricBudget2022: Math.round((((Number(req.body.kwRequired_2022) * 720) * 12) * 0.09)),
-                            //            electricBudget2023: Math.round((((Number(req.body.kwRequired_2023) * 720) * 12) * 0.09)),
-                            //            electricBudget2024: Math.round((((Number(req.body.kwRequired_2024) * 720) * 12) * 0.09)),
-                            //            electricBudget2025: Math.round((((Number(req.body.kwRequired_2025) * 720) * 12) * 0.09))
-                            //        });
-                            //
-                            //    var options = { filename: 'public/modules/datacollectors/' + fileName, format: 'Letter' };
-                            //    pdf.create(renderedHtml, options).toFile(function(err, res) {
-                            //        if (err) return console.log(err);
-                            //        console.log(res);
-                            //    });
-                            //    res.send(201,fileName);
-                            //},800);
                         }
                     });
             }

@@ -16,10 +16,10 @@ angular.module('datacollectors').controller('InternalDcDemandController',
             $scope.selectedInternalDcDemand;
 
             function initDcList(){
-                $http.get('/mongodata/?collectionName=DC_Facilities&subject=datacenter-listing').success(function(response) {
-                    console.log('found ' + response.length + ' records for datacenter-listing');
+                $http.get('/dc_inventory').success(function(response) {
+                    console.log('found ' + response.length + ' records for DcInventory');
                     response.forEach(function(record){
-                        $scope.dcNames.push({name: record.DataCenterName, country: record.Country, siteCode: record.DCSiteID,sku: record.SKU});
+                        $scope.dcNames.push({name: record.DataCenterName, country: record.DcCountry, siteCode: record.DcSiteCode,address: record.DcAddress, region: record.DcRegion});
                     });
                 });
             }
@@ -31,6 +31,55 @@ angular.module('datacollectors').controller('InternalDcDemandController',
                         $scope.internalDcDemands.push({name: record.RequestTitle});
                     });
                 });
+            }
+
+            function resetForm(){
+                $scope.internalDcDemands.forEach(function(demand){
+                    demand.ticked = false;
+                });
+                $scope.requestTitle = '';
+                $scope.requestDescription = '';
+                $scope.requestorName = '';
+                $scope.selectedDc = '';
+
+                $scope.dcCountry = '';
+                $scope.dcSiteCode = '';
+
+                $scope.kwRequired_2016 = '';
+                $scope.kwRequired_2017 = '';
+                $scope.kwRequired_2018 = '';
+                $scope.kwRequired_2019 = '';
+                $scope.kwRequired_2020 = '';
+                $scope.kwRequired_2021 = '';
+                $scope.kwRequired_2022 = '';
+                $scope.kwRequired_2023 = '';
+                $scope.kwRequired_2024 = '';
+                $scope.kwRequired_2025 = '';
+
+                $scope.cbRequired_2016 = '';
+                $scope.cbRequired_2017 = '';
+                $scope.cbRequired_2018 = '';
+                $scope.cbRequired_2019 = '';
+                $scope.cbRequired_2020 = '';
+                $scope.cbRequired_2021 = '';
+                $scope.cbRequired_2022 = '';
+                $scope.cbRequired_2023 = '';
+                $scope.cbRequired_2024 = '';
+                $scope.cbRequired_2025 = '';
+
+                $scope.computeCheckboxModel.cloudCompute = false;
+                $scope.computeCheckboxModel.bizCloudHc = false;
+                $scope.computeCheckboxModel.bizCloud = false;
+                $scope.computeCheckboxModel.storageAsAService = false;
+                $scope.computeCheckboxModel.mainframe = false;
+                $scope.computeCheckboxModel.unixFarm = false;
+                $scope.computeCheckboxModel.windowsFarm = false;
+                $scope.computeCheckboxModel.as400 = false;
+                $scope.computeCheckboxModel.myWorkstyle = false;
+                $scope.computeCheckboxModel.cyber = false;
+                $scope.computeCheckboxModel.serviceManagement = false;
+                $scope.computeCheckboxModel.lan = false;
+                $scope.computeCheckboxModel.wan = false;
             }
 
             $scope.$watch(function(scope) {return  $scope.selectedDcName },
@@ -175,6 +224,7 @@ angular.module('datacollectors').controller('InternalDcDemandController',
                                 .success(function(data) {
                                     var file = new Blob([data], {type: 'application/pdf'});
                                     var fileURL = URL.createObjectURL(file);
+                                    resetForm();
 
                                     var newTab = $window.open('about:blank', '_blank');
                                     newTab.document.write("<object width='600' height='400' data='" + fileURL + "' type='"+ 'application/pdf' +"' ></object>");

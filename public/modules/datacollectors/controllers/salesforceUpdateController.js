@@ -33,7 +33,7 @@ angular.module('datacollectors').controller('SalesforceUpdateController',
         var uploader = $scope.uploader = new FileUploader({
         });
 
-        console.log('This is FileUploadController');
+        console.log('This is SalesForceUpdateController');
 
         function getEnvironment (){
 
@@ -58,10 +58,10 @@ angular.module('datacollectors').controller('SalesforceUpdateController',
         }
 
         function initDcList(){
-            $http.get('/mongodata/?collectionName=DC_Facilities&subject=datacenter-listing').success(function(response) {
-                console.log('found ' + response.length + ' records for datacenter-listing');
+            $http.get('/dc_inventory').success(function(response) {
+                console.log('found ' + response.length + ' records for DcInventory');
                 response.forEach(function(record){
-                    $scope.dcNames.push({name: record.DataCenterName, country: record.Country, siteCode: record.DCSiteID,sku: record.SKU});
+                    $scope.dcNames.push({name: record.DataCenterName, country: record.DcCountry, siteCode: record.DcSiteCode,address: record.DcAddress, region: record.DcRegion});
                 });
             });
         }

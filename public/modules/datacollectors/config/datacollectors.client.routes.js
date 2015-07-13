@@ -37,6 +37,10 @@ angular.module('datacollectors').config(['$stateProvider',
                 url: '/request-access',
                 templateUrl: 'modules/datacollectors/views/access-request-form.html'
             }).
+            state('initial-access-request-feedback', {
+                url: '/initial-access-request-feedback',
+                templateUrl: 'modules/datacollectors/views/access-request-initial-feedback.html'
+            }).
             state('admin', {
                 url: '/admin',
                 templateUrl: 'modules/datacollectors/views/admin-index.client.view.html'

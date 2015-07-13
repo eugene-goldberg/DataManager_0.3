@@ -1379,10 +1379,13 @@ module.exports = function(db) {
                             }
                             else {
                                 console.log('update result:  ' + result);
+
                             }
                         }
                     );
                 });
+                res.send(201);
+                assert.equal(null, err);
             }
         });
     });

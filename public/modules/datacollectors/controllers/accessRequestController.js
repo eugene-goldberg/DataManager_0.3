@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('datacollectors').controller('AccessRequestController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Datacollectors',
-    function($scope, $http, $stateParams, $location, Authentication, Datacollectors) {
+angular.module('datacollectors').controller('AccessRequestController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Datacollectors','$state',
+    function($scope, $http, $stateParams, $location, Authentication, Datacollectors,$state) {
         $scope.authentication = Authentication;
 
         $scope.currentUser = Authentication.user;
@@ -64,7 +64,7 @@ angular.module('datacollectors').controller('AccessRequestController', ['$scope'
 
             $http.post('/access_request', json)
                 .success(function(data, status, headers, config) {
-
+                    $state.go('initial-access-request-feedback');
                 }).
                 error(function(data, status, headers, config) {
                     alert('Error while posting access request');

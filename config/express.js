@@ -1350,6 +1350,43 @@ module.exports = function(db) {
         });
     });
 
+    app.post('/grant_requested_roles', function(req, res) {
+        console.log('Grant Requested Roles Request Received');
+        console.log('request body:  ' + req.body);
+
+        MongoClient.connect(url, function (err, db) {
+            if (err) {
+                console.log('Unable to connect to the mongoDB server. Error:', err);
+            } else {
+                console.log('Connection established to', url);
+
+                var collection = db.collection('users');
+
+                var roles = req.body.requestedRoles.split(',');
+
+                roles.forEach(function(role){
+                    collection.update(
+                        {
+                            email: req.body.userEmail
+                        },
+                        {
+                            $push: { roles: role }
+                        },
+                        {upsert: true},
+                        function(err, result) {
+                            if (err) {
+                                console.log('err:  ' + err);
+                            }
+                            else {
+                                console.log('update result:  ' + result);
+                            }
+                        }
+                    );
+                });
+            }
+        });
+    });
+
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: false }));
 

@@ -11,6 +11,10 @@ angular.module('datacollectors').controller('AdminController', ['$scope', '$http
 
         $scope.accessRequests;
 
+        $scope.requestedRoles;
+
+        $scope.userEmail;
+
         function getUsers(){
             $http({
                 method: 'GET',
@@ -51,6 +55,21 @@ angular.module('datacollectors').controller('AdminController', ['$scope', '$http
                 }).
                 error(function(data, status, headers, config) {
                     alert('Error while generating Playcards');
+                });
+        };
+
+        $scope.grantRequestedRoles = function(){
+          //alert('Granting roles: ' + $scope.requestedRoles + '  to  ' + $scope.userEmail);
+            var json = {
+                requestedRoles: $scope.requestedRoles,
+                userEmail:  $scope.userEmail
+            };
+            $http.post('/grant_requested_roles', json)
+                .success(function(data, status, headers, config) {
+
+                }).
+                error(function(data, status, headers, config) {
+                    alert('Error while granting requested roles');
                 });
         };
 
@@ -178,6 +197,24 @@ angular.module('datacollectors').controller('AdminController', ['$scope', '$http
             },
             selection: {
                 mode: 'multiple'
+            },
+
+            onSelectionChanged: function (selecteditems) {
+                var data = selecteditems.selectedRowsData;
+                if(data.length > 0){
+                    //for(var prop in data[0]){
+                    //    console.log('selected requests prop: ' + prop + '  selected requests value: ' + data[0][prop]);
+                    //}
+
+                    $scope.requestedRoles = data[0].RequestedRoles;
+                    $scope.userEmail = data[0].email;
+
+                }
+                else {
+
+                }
+
+
             }
         };
     }

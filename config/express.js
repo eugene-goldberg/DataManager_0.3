@@ -17,6 +17,7 @@ var fs = require('fs'),
 	passport = require('passport'),
 	requestUrl = require('url'),
     ObjectID = require('mongodb').ObjectID,
+    format = require('date-format'),
 	mongoStore = require('connect-mongo')({
 		session: session
 	}),
@@ -663,9 +664,16 @@ module.exports = function(db) {
                 var matchingRecords;
 
                 var userName;
+                var dcRegion;
                 var userCollection = db.collection('users');
                 userCollection.find({_id: ObjectID(req.session.passport.user)}).toArray(function(err, docs) {
                     userName = docs[0].username;
+                });
+
+                var dcInventoryCollection = db.collection('DcInventory');
+
+                dcInventoryCollection.find({DcCountry: req.body.dcCountry}).toArray(function(err, docs) {
+                    dcRegion = docs[0].DcRegion;
                 });
 
                 collection.update(
@@ -773,9 +781,12 @@ module.exports = function(db) {
                                         var tmpl = swig.compileFile('public/modules/datacollectors/template.html'),
                                             renderedHtml = tmpl({
                                                 DcName: req.body.dcName,
+                                                DcRegion: dcRegion,
+                                                DcCountry: req.body.dcCountry,
+                                                DcSiteCode: req.body.dcSiteCode,
                                                 OpportunityId:  req.body.opportunityId,
                                                 userName:  userName,
-                                                quoteDate:    new Date().toISOString(),
+                                                quoteDate:    format('MM/dd/yyyy', new Date()),
                                                 kWLeased2016: Math.round(((Number(req.body.kwRequired_2016) * 185) * 12)),
                                                 kWLeased2017: Math.round(((Number(req.body.kwRequired_2017) * 185) * 12)),
                                                 kWLeased2018: Math.round(((Number(req.body.kwRequired_2018) * 185) * 12)),
@@ -878,9 +889,12 @@ module.exports = function(db) {
                                         var tmpl = swig.compileFile('public/modules/datacollectors/template.html'),
                                             renderedHtml = tmpl({
                                                 DcName: req.body.dcName,
+                                                DcRegion: dcRegion,
+                                                DcCountry: req.body.dcCountry,
+                                                DcSiteCode: req.body.dcSiteCode,
                                                 OpportunityId:  req.body.opportunityId,
                                                 userName:  userName,
-                                                quoteDate:    new Date().toISOString(),
+                                                quoteDate:    format('MM/dd/yyyy', new Date()),
                                                 kWLeased2016: Math.round(((Number(req.body.kwRequired_2016) * 185) * 12)),
                                                 kWLeased2017: Math.round(((Number(req.body.kwRequired_2017) * 185) * 12)),
                                                 kWLeased2018: Math.round(((Number(req.body.kwRequired_2018) * 185) * 12)),

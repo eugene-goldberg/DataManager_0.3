@@ -41,9 +41,21 @@ angular.module('datacollectors').config(['$stateProvider',
                 url: '/initial-access-request-feedback',
                 templateUrl: 'modules/datacollectors/views/access-request-initial-feedback.html'
             }).
+            state('new-functionality-request-feedback', {
+                url: '/new-functionality-request-feedback',
+                templateUrl: 'modules/datacollectors/views/new-functionality-request-feedback.html'
+            }).
             state('admin', {
                 url: '/admin',
                 templateUrl: 'modules/datacollectors/views/admin-index.client.view.html'
+            }).
+            state('request-new-functionality', {
+                url: '/request-new-functionality',
+                templateUrl: 'modules/datacollectors/views/request-new-functionality.html'
+            }).
+            state('review-requests-for-new-functionality', {
+                url: '/review-requests-for-new-functionality',
+                templateUrl: 'modules/datacollectors/views/new-functionality-request-listing.html'
             });
 	}
 ]);

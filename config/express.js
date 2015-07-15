@@ -303,6 +303,22 @@ module.exports = function(db) {
         });
     });
 
+    app.get('/new_functionality_requests_listing', function(req,res){
+        console.log('access requests listing is being requested');
+        MongoClient.connect(url, function (err, db) {
+            if (err) {
+                console.log('Unable to connect to the mongoDB server. Error:', err);
+            } else {
+                var collection = db.collection('NewFunctionalityRequests');
+                collection.find({},{_id:0}).toArray(function(err, docs) {
+                    res.json(docs);
+                });
+
+
+            }
+        });
+    });
+
     app.get('/opportunity_ids', function(req, res){
         console.log('opportunity_idsRequest Successful');
         console.log('_parsedUrl.query:  ' + req._parsedUrl.query);
@@ -1269,6 +1285,115 @@ module.exports = function(db) {
                             RequestedRoles: req.body.roles
                         }
                     },
+                    {upsert: true},
+                    function (err, result) {
+                        if (err) {
+                            console.log('err:  ' + err);
+                        }
+                        else {
+                            console.log('update result:  ' + result);
+                            res.send(201);
+                        }
+                    });
+            }
+        })
+    });
+
+    app.post('/new_functionality_request', function(req, res) {
+        console.log('New Functionality Request post Received');
+        console.log('request body:  ' + req.body);
+        var appAreas;
+
+        req.body.appAreas.forEach(function(area){
+            if(appAreas !== undefined){
+                appAreas = appAreas + ',' + area.name;
+            }
+            else {
+                appAreas = area.name;
+            }
+            var p = 0;
+        });
+
+        MongoClient.connect(url, function (err, db) {
+            if (err) {
+                console.log('Unable to connect to the mongoDB server. Error:', err);
+            } else {
+
+                var collection = db.collection('NewFunctionalityRequests');
+
+                collection.insert(
+                    {
+                            RequestTitle: req.body.requestTitle,
+                            RequestedDeliveryDate: req.body.requestedDeliveryDate,
+                            RequestorEmail: req.body.email,
+                            RequestorFirstName: req.body.firstName,
+                            RequestorLastName: req.body.lastName,
+                            RequestorUserName: req.body.username,
+                            Description: req.body.description,
+                            AppAreas: appAreas,
+                            Criticality: req.body.criticality[0].name,
+
+                            StakeholderFirstName: req.body.stakeholderFirstName,
+                            StakeholderLastName: req.body.stakeholderLastName,
+                            StakeholderUserName: req.body.stakeholderUserName,
+                            StakeholderEmail: req.body.stakeholderEmail,
+
+                            ReviewedOn: '',
+                            Status: '',
+                            AssignedTo: '',
+                            Comments: ''
+
+                    },
+                    //{upsert: true},
+                    function (err, result) {
+                        if (err) {
+                            console.log('err:  ' + err);
+                        }
+                        else {
+                            console.log('update result:  ' + result);
+                            res.send(201);
+                        }
+                    });
+            }
+        })
+    });
+
+    app.post('/new_functionality_request_update', function(req, res) {
+        console.log('New Functionality Request post Received');
+        console.log('request body:  ' + req.body);
+        //var appAreas;
+
+        //req.body.appAreas.forEach(function(area){
+        //    if(appAreas !== undefined){
+        //        appAreas = appAreas + ',' + area.name;
+        //    }
+        //    else {
+        //        appAreas = area.name;
+        //    }
+        //    var p = 0;
+        //});
+
+        MongoClient.connect(url, function (err, db) {
+            if (err) {
+                console.log('Unable to connect to the mongoDB server. Error:', err);
+            } else {
+
+                var collection = db.collection('NewFunctionalityRequests');
+
+                collection.update(
+                    {
+                        RequestTitle: req.body.requestTitle
+                    },
+                    {
+                       $set: {
+                           ReviewedOn: req.body.reviewedOn,
+                           Status: req.body.status,
+                           AssignedTo: req.body.assignedTo,
+                           Comments: req.body.comments
+
+                       }
+                    }
+                    ,
                     {upsert: true},
                     function (err, result) {
                         if (err) {

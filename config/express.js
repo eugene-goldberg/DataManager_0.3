@@ -18,6 +18,7 @@ var fs = require('fs'),
 	requestUrl = require('url'),
     ObjectID = require('mongodb').ObjectID,
     format = require('date-format'),
+    nodemailer = require('nodemailer'),
 	mongoStore = require('connect-mongo')({
 		session: session
 	}),
@@ -29,6 +30,22 @@ var fs = require('fs'),
     var pdf = require('html-pdf');
 
     var swig  = require('swig');
+
+    var transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'dcdmmailer@gmail.com',
+            pass: 'Kpss1s0k'
+        }
+    });
+
+    //var mailOptions = {
+    //    from: 'DCDM Mailer <dcdmmailer@gmail.com>', // sender address
+    //    to: 'ygoldberg@csc.com,', // list of receivers
+    //    subject: 'All emails will now go to you', // Subject line
+    //    text: 'All emails will now go to you!', // plaintext body
+    //    html: '<b>All emails will now go to you!</b>' // html body
+    //};
 
 var multer  = require('multer');
 var myParser = require('excel-file-parser');
@@ -1351,6 +1368,28 @@ module.exports = function(db) {
                         }
                         else {
                             console.log('update result:  ' + result);
+
+                            var messageSubject = 'A New Functionality Request has been entered';
+                            var messageText = req.body.requestTitle;
+                            var messageHtml = '<b>Request Title:    ' + req.body.requestTitle + '   Requestor email:' + req.body.email + '</b>';
+
+                            var mailOptions = {
+                                from: 'DCDM Mailer <dcdmmailer@gmail.com>', // sender address
+                                to: 'ygoldberg@csc.com,', // list of receivers
+                                subject: messageSubject, // Subject line
+                                text: messageText, // plaintext body
+                                html: messageHtml // html body
+                            };
+
+                            transporter.sendMail(mailOptions, function(error, info){
+                                if(error){
+                                    console.log(error);
+                                }else{
+                                    console.log('Message sent: ' + info.response);
+                                }
+                            });
+
+
                             res.send(201);
                         }
                     });

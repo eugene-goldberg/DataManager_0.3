@@ -70,6 +70,8 @@ angular.module('datacollectors').controller('dataExplorerController', ['$scope',
 
         ];
 
+        $scope.subjectList = [];
+
         var collectionName;
 
         var selectedCategory;
@@ -111,6 +113,24 @@ angular.module('datacollectors').controller('dataExplorerController', ['$scope',
             }).error(function(){
                 alert('error');
             });
+
+
+            ////////////
+            $http({
+                method: 'GET',
+                url: '/distinct_subject/?' + collectionName
+            }).success(function(data){
+                // With the data succesfully returned, call our callback
+                data.forEach(function(subject){
+                    $scope.subjectList.push({name:subject});
+                });
+            }).error(function(){
+                alert('error');
+            });
+
+
+            /////////////
+
         };
 
         $scope.getSelectedDataVersion = function(data){
@@ -122,9 +142,14 @@ angular.module('datacollectors').controller('dataExplorerController', ['$scope',
             angular.forEach( $scope.outputCategories, function( value, key ) {
                 collectionName = value.collectionName;
             });
+            $scope.subjectList.forEach(function(subject){
+                if(subject.ticked){
+                    $scope.subject = subject.name;
+                }
+            });
             $http({
                 method: 'GET',
-                url: '/mongodata/?collectionName=' + collectionName + '&dataVersion=' + selectedDataVersion + '&' + $scope.skip
+                url: '/mongodata/?collectionName=' + collectionName + '&dataVersion=' + selectedDataVersion + '&subject=' + $scope.subject + '&' + $scope.skip
             }).success(function(data){
                 // With the data succesfully returned, call our callback
                 $scope.skip = $scope.skip + 500;

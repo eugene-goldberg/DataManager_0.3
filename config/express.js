@@ -136,7 +136,7 @@ module.exports = function(db) {
 		console.log('Request Successful');
 		console.log('_parsedUrl.query:  ' + req._parsedUrl.query);
 
-        var skip = parseInt(req._parsedUrl.query.split('&')[2]);
+        var skip = parseInt(req._parsedUrl.query.split('&')[3]);
 
 		var url_parts =  requestUrl.parse(req.url, true);
 		var query = url_parts.query;
@@ -154,36 +154,64 @@ module.exports = function(db) {
 				if(query.dataVersion && query.subject){
 					collection.find({DataVersion: query.dataVersion,
 						Subject: query.subject
-					}).toArray(function(err, docs) {
-						//console.log(docs);
-						res.json(docs);
-						assert.equal(null, err);
-						db.close();
-					});
-				}
-
-				if(query.dataVersion){
-					collection.find({DataVersion: query.dataVersion
 					}).limit(500).skip(skip).toArray(function(err, docs) {
 						//console.log(docs);
 						res.json(docs);
 						assert.equal(null, err);
-						db.close();
+						//db.close();
 					});
 				}
 
-				if(query.subject){
-					collection.find({Subject: query.subject
-					}).toArray(function(err, docs) {
-						//console.log(docs);
-						res.json(docs);
-						assert.equal(null, err);
-						db.close();
-					});
-				}
+				//if(query.dataVersion){
+				//	collection.find({DataVersion: query.dataVersion
+				//	}).limit(500).skip(skip).toArray(function(err, docs) {
+				//		//console.log(docs);
+				//		res.json(docs);
+				//		assert.equal(null, err);
+				//		//db.close();
+				//	});
+				//}
+
+				//if(query.subject){
+				//	collection.find({Subject: query.subject
+				//	}).toArray(function(err, docs) {
+				//		//console.log(docs);
+				//		res.json(docs);
+				//		assert.equal(null, err);
+				//		//db.close();
+				//	});
+				//}
 			}
 		});
 	});
+
+    app.get('/distinct_subject', function(req, res){
+        console.log('Request Successful');
+        console.log('_parsedUrl.query:  ' + req._parsedUrl.query);
+
+        var skip = parseInt(req._parsedUrl.query.split('&')[2]);
+
+        var url_parts =  requestUrl.parse(req.url, true);
+        var query = url_parts.query;
+
+        MongoClient.connect(url, function (err, db) {
+            if (err) {
+                console.log('Unable to connect to the mongoDB server. Error:', err);
+            } else {
+                console.log('Connection established to', url);
+
+                var collection = db.collection(req._parsedUrl.query);
+
+                    collection.distinct('Subject'
+                    ,function(err, docs) {
+                        //console.log(docs);
+                        res.json(docs);
+                        assert.equal(null, err);
+                        db.close();
+                    });
+            }
+        });
+    });
 
     app.get('/opportunities', function(req,res){
         var url_parts = requestUrl.parse(req.url, true);
@@ -1445,7 +1473,7 @@ module.exports = function(db) {
 
                             var mailOptions = {
                                 from: 'DCDM Mailer <dcdmmailer@gmail.com>', // sender address
-                                to: 'ygoldberg@csc.com,', // list of receivers
+                                to: 'jtabeling@csc.com,', // list of receivers
                                 subject: messageSubject, // Subject line
                                 text: messageText, // plaintext body
                                 html: messageHtml // html body

@@ -2,7 +2,7 @@
     <div  >
         <div class="container">
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <br>
                     <label for="category">Category name</label>
                     <div id="category">
@@ -14,6 +14,22 @@
                                 tick-property="ticked"
                                 selection-mode="single"
                                 on-item-click="getDataVersionsForSelectedCategory( data )"
+                                >
+                        </isteven-multi-select>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <br>
+                    <label for="subjectList">Subject</label>
+
+                    <div id="subjectList">
+                        <isteven-multi-select
+                                input-model="subjectList"
+                                output-model="selectedSubject"
+                                button-label="icon name"
+                                item-label="icon name maker"
+                                tick-property="ticked"
+                                selection-mode="single"
                                 >
                         </isteven-multi-select>
                     </div>

@@ -165,6 +165,11 @@ angular.module('datacollectors').controller('dataExplorerController', ['$scope',
                 dataSource: 'data',
                 columns: 'collectionDatafields'
             },
+            "export": {
+                enabled: true,
+                fileName: "DataExport",
+                allowExportSelectedData: true
+            },
             grouping: {
                 autoExpandAll: true
             },

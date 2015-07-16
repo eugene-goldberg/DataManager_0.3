@@ -1007,6 +1007,8 @@ module.exports = function(db) {
         console.log('Internal DC request update Received');
         console.log('request body:  ' + req.body);
 
+        var httpResponse = res;
+
         var kWLeased2016 = Math.round(((Number(req.body.kwRequired_2016) * 185) * 12));
         var kWLeased2017 = Math.round(((Number(req.body.kwRequired_2017) * 185) * 12));
         var kWLeased2018 = Math.round(((Number(req.body.kwRequired_2018) * 185) * 12));
@@ -1074,10 +1076,15 @@ module.exports = function(db) {
 
             var options = { filename: 'public/modules/datacollectors/' + fileName, format: 'Letter' };
             pdf.create(renderedHtml, options).toFile(function(err, res) {
-                if (err) return console.log(err);
-                console.log(res);
+                if (err){
+                    return console.log(err);
+                    //console.log(res);
+                }
+                else {
+                    httpResponse.send(201,fileName);
+                }
             });
-            res.send(201,fileName);
+
         };
 
         eventEmitter.on('internalDcDemandUpdateFinishedEvent', internalDcDemandUpdateFinishedHandler);

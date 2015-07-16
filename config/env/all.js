@@ -37,6 +37,7 @@ module.exports = {
 				'public/lib/angular-bootstrap/ui-bootstrap.js',
 				'public/lib/isteven-multi-select.js',
 				'http://cdn3.devexpress.com/jslib/15.1.4/js/dx.all.js',
+				'https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.js',
 				'public/modules/datacollectors/directives/ng.directives.js'
 
 			]

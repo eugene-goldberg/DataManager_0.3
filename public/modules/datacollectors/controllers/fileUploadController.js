@@ -8,7 +8,7 @@ angular.module('datacollectors').controller('FileUploadController',
 
         $scope.uploadUrl = '';
 
-        var url = 'http://dcdm.io:3000/api/files';
+        var url = '/api/files';
 
         var uploader = $scope.uploader = new FileUploader({
             //url: 'http://dctool-lnx.cloudapp.net:3001/api/files',
@@ -28,7 +28,7 @@ angular.module('datacollectors').controller('FileUploadController',
 
                 }
                 if(response.environment === 'development'){
-                  url = 'http://localhost:3000/api/files';
+                  url = '/api/files';
 
                     initUploader(url);
 

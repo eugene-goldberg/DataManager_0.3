@@ -1407,6 +1407,27 @@ module.exports = function(db) {
                         }
                         else {
                             console.log('update result:  ' + result);
+
+                            var messageSubject = 'A New User Access Request has been entered';
+                            var messageText = 'A New User Access Request has been entered by  ' + req.body.email;
+                            var messageHtml = '<b> A new user is requesting access: ' +   'Requestor email:' + req.body.email + '</b>';
+
+                            var mailOptions = {
+                                from: 'DCDM Mailer <dcdmmailer@gmail.com>', // sender address
+                                to: 'jtabeling@csc.com,', // list of receivers
+                                subject: messageSubject, // Subject line
+                                text: messageText, // plaintext body
+                                html: messageHtml // html body
+                            };
+
+                            transporter.sendMail(mailOptions, function(error, info){
+                                if(error){
+                                    console.log(error);
+                                }else{
+                                    console.log('Message sent: ' + info.response);
+                                }
+                            });
+
                             res.send(201);
                         }
                     });

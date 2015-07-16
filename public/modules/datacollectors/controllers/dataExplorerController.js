@@ -5,6 +5,10 @@ angular.module('datacollectors').controller('dataExplorerController', ['$scope',
     function($scope, $http, $stateParams, $location, Authentication, Datacollectors) {
         $scope.authentication = Authentication;
 
+        $scope.skip = 0;
+
+        $scope.data = [];
+
         $scope.inputCategories = [
             {
                 name: 'Cost Source Actuals',
@@ -120,13 +124,11 @@ angular.module('datacollectors').controller('dataExplorerController', ['$scope',
             });
             $http({
                 method: 'GET',
-                url: '/mongodata/?collectionName=' + collectionName + '&dataVersion=' + selectedDataVersion
-                //,
-                //skip: 10,
-                //take:   10
+                url: '/mongodata/?collectionName=' + collectionName + '&dataVersion=' + selectedDataVersion + '&' + $scope.skip
             }).success(function(data){
                 // With the data succesfully returned, call our callback
-                $scope.data = data;
+                $scope.skip = $scope.skip + 500;
+                $scope.data = $scope.data.concat(data);
                 var fields = data[0].DataFields;
 
                 var fieldList = [];

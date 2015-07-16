@@ -136,7 +136,9 @@ module.exports = function(db) {
 		console.log('Request Successful');
 		console.log('_parsedUrl.query:  ' + req._parsedUrl.query);
 
-		var url_parts = requestUrl.parse(req.url, true);
+        var skip = parseInt(req._parsedUrl.query.split('&')[2]);
+
+		var url_parts =  requestUrl.parse(req.url, true);
 		var query = url_parts.query;
 
 		var dataVersion = req.query.dataVersion;
@@ -162,7 +164,7 @@ module.exports = function(db) {
 
 				if(query.dataVersion){
 					collection.find({DataVersion: query.dataVersion
-					}).toArray(function(err, docs) {
+					}).limit(500).skip(skip).toArray(function(err, docs) {
 						//console.log(docs);
 						res.json(docs);
 						assert.equal(null, err);

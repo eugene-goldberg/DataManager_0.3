@@ -625,7 +625,7 @@ module.exports = function(db) {
 
                 var collection = db.collection('InternalDcDemand');
 
-                collection.find({RequestTitle:requestTitle}).toArray(function(err, docs) {
+                collection.find({RequestTitle: requestTitle.replace(/%20/g,' ') }).toArray(function(err, docs) {
                     res.json(docs);
                     assert.equal(null, err);
                     db.close();
@@ -1007,6 +1007,28 @@ module.exports = function(db) {
         console.log('Internal DC request update Received');
         console.log('request body:  ' + req.body);
 
+        var kWLeased2016 = Math.round(((Number(req.body.kwRequired_2016) * 185) * 12));
+        var kWLeased2017 = Math.round(((Number(req.body.kwRequired_2017) * 185) * 12));
+        var kWLeased2018 = Math.round(((Number(req.body.kwRequired_2018) * 185) * 12));
+        var kWLeased2019 = Math.round(((Number(req.body.kwRequired_2019) * 185) * 12));
+        var kWLeased2020 = Math.round(((Number(req.body.kwRequired_2020) * 185) * 12));
+        var kWLeased2021 = Math.round(((Number(req.body.kwRequired_2021) * 185) * 12));
+        var kWLeased2022 = Math.round(((Number(req.body.kwRequired_2022) * 185) * 12));
+        var kWLeased2023 = Math.round(((Number(req.body.kwRequired_2023) * 185) * 12));
+        var kWLeased2024 = Math.round(((Number(req.body.kwRequired_2024) * 185) * 12));
+        var kWLeased2025 =  Math.round(((Number(req.body.kwRequired_2025) * 185) * 12));
+
+        var electricBudget2016 = Math.round((((Number(req.body.kwRequired_2016) * 720) * 12) * 0.09));
+        var electricBudget2017 = Math.round((((Number(req.body.kwRequired_2017) * 720) * 12) * 0.09));
+        var electricBudget2018 = Math.round((((Number(req.body.kwRequired_2018) * 720) * 12) * 0.09));
+        var electricBudget2019 = Math.round((((Number(req.body.kwRequired_2019) * 720) * 12) * 0.09));
+        var electricBudget2020 = Math.round((((Number(req.body.kwRequired_2020) * 720) * 12) * 0.09));
+        var electricBudget2021 = Math.round((((Number(req.body.kwRequired_2021) * 720) * 12) * 0.09));
+        var electricBudget2022 = Math.round((((Number(req.body.kwRequired_2022) * 720) * 12) * 0.09));
+        var electricBudget2023 = Math.round((((Number(req.body.kwRequired_2023) * 720) * 12) * 0.09));
+        var electricBudget2024 = Math.round((((Number(req.body.kwRequired_2024) * 720) * 12) * 0.09));
+        var electricBudget2025 = Math.round((((Number(req.body.kwRequired_2025) * 720) * 12) * 0.09));
+
         ///////////////Update Finished Handler
 
         var internalDcDemandUpdateFinishedHandler = function internalDcDemandUpdateFinished() {
@@ -1017,6 +1039,8 @@ module.exports = function(db) {
             var tmpl = swig.compileFile('public/modules/datacollectors/template.html'),
                 renderedHtml = tmpl({
                     DcName: req.body.dcName,
+                    DcCountry: req.body.dcCountry,
+                    DcSiteCode: req.body.dcSiteCode,
                     OpportunityId:  req.body.opportunityId,
                     OpportunityName:  req.body.opportunityName,
                     AccountName:    req.body.accountName,
@@ -1040,7 +1064,12 @@ module.exports = function(db) {
                     electricBudget2022: Math.round((((Number(req.body.kwRequired_2022) * 720) * 12) * 0.09)),
                     electricBudget2023: Math.round((((Number(req.body.kwRequired_2023) * 720) * 12) * 0.09)),
                     electricBudget2024: Math.round((((Number(req.body.kwRequired_2024) * 720) * 12) * 0.09)),
-                    electricBudget2025: Math.round((((Number(req.body.kwRequired_2025) * 720) * 12) * 0.09))
+                    electricBudget2025: Math.round((((Number(req.body.kwRequired_2025) * 720) * 12) * 0.09)),
+
+                    kWlTotal: (kWLeased2016 + kWLeased2017 + kWLeased2018 + kWLeased2019 + kWLeased2020 + kWLeased2021 + kWLeased2022 + kWLeased2023
+                    + kWLeased2024 + kWLeased2025),
+                    electricalBudgetTotal: (electricBudget2016 + electricBudget2017 + electricBudget2017 + electricBudget2019 + electricBudget2020
+                    + electricBudget2021 + electricBudget2022 + electricBudget2023 + electricBudget2024 + electricBudget2025)
                 });
 
             var options = { filename: 'public/modules/datacollectors/' + fileName, format: 'Letter' };

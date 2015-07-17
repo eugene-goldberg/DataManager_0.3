@@ -113,6 +113,24 @@ angular.module('datacollectors').controller('AdminController', ['$scope', '$http
             }
         };
 
+        $scope.removeSelectedUsers = function(){
+            if($scope.userEmail){
+                var json = {email: $scope.userEmail};
+                $http.post('/remove_users', json)
+                    .success(function(data, status, headers, config) {
+                        for(var i = 0; i < $scope.users.length; i++) {
+                            if($scope.users[i].Email == $scope.userEmail) {
+                                $scope.users.splice(i, 1);
+                                break;
+                            }
+                        }
+                    }).
+                    error(function(data, status, headers, config) {
+                        alert('Error while granting requested roles');
+                    });
+            }
+        };
+
         getUsers();
         getRoles();
         getAccessRequests();

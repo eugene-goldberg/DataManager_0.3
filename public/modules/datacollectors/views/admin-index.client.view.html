@@ -11,7 +11,12 @@
                         <legend><strong>Users</strong> </legend>
                             <div  dx-data-grid="usersGridOptions"></div>
                                 <br>
+                        <div class="col-sm-3">
                         <button ng-click="grantSelectedRolesToSelectedUsers()">Grant selected Roles to selected Users</button>
+                        </div>
+                        <div class="col-sm-3">
+                            <button ng-click="removeSelectedUsers()">Remove selected Users</button>
+                        </div>
                         <br>
                         <legend><strong>Roles</strong> </legend>
                             <div  dx-data-grid="rolesGridOptions"></div>

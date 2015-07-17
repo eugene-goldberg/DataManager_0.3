@@ -1435,6 +1435,34 @@ module.exports = function(db) {
         })
     });
 
+    app.post('/remove_access_request', function(req, res) {
+        console.log('Remove Access Request post Received');
+        console.log('request body:  ' + req.body);
+
+        MongoClient.connect(url, function (err, db) {
+            if (err) {
+                console.log('Unable to connect to the mongoDB server. Error:', err);
+            } else {
+
+                var collection = db.collection('AccessRequests');
+
+                collection.remove(
+                    {
+                        email: req.body.email
+                    },
+                    function (err, result) {
+                        if (err) {
+                            console.log('err:  ' + err);
+                        }
+                        else {
+                            console.log('update result:  ' + result);
+                            res.send(201);
+                        }
+                    });
+            }
+        })
+    });
+
     app.post('/new_functionality_request', function(req, res) {
         console.log('New Functionality Request post Received');
         console.log('request body:  ' + req.body);

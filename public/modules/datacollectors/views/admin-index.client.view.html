@@ -19,7 +19,13 @@
                         <legend><strong>Access Requests</strong> </legend>
                             <div  dx-data-grid="accessRequestsGridOptions"></div>
                         <br>
-                        <button ng-click="grantRequestedRoles()">Grant Requested Roles</button>
+                        <div class="col-sm-3">
+                            <button ng-click="grantRequestedRoles()">Grant Requested Roles</button>
+                        </div>
+                        <div class="col-sm-3">
+                            <button ng-click="removeSelectedAccessRequest()">Remove selected access request</button>
+                        </div>
+
                     </div>
                 </form>
         </tab>

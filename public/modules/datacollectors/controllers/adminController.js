@@ -95,6 +95,24 @@ angular.module('datacollectors').controller('AdminController', ['$scope', '$http
                 });
         };
 
+        $scope.removeSelectedAccessRequest = function(){
+            if($scope.userEmail){
+                var json = {email: $scope.userEmail};
+                $http.post('/remove_access_request', json)
+                    .success(function(data, status, headers, config) {
+                        for(var i = 0; i < $scope.accessRequests.length; i++) {
+                            if($scope.accessRequests[i].email == $scope.userEmail) {
+                                $scope.accessRequests.splice(i, 1);
+                                break;
+                            }
+                        }
+                    }).
+                    error(function(data, status, headers, config) {
+                        alert('Error while granting requested roles');
+                    });
+            }
+        };
+
         getUsers();
         getRoles();
         getAccessRequests();

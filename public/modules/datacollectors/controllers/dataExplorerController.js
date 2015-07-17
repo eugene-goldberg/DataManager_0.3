@@ -168,22 +168,23 @@ angular.module('datacollectors').controller('dataExplorerController', ['$scope',
             });
         };
 
-        console.log('$scope.people:  ' + $scope.people);
-
-        function getColumns(){
-
-            var columnList = ['Line #','Region','FY15 TCO','FY16 Budget','Comments/Source',
-                'Data Center','Address','Type','Lease Expiration','DCM Lead','CCE Lead',
-                'CCE Service Type','JCI Lead','JCI Service Type'];
-
-            var columns = [];
-
-            columnList.forEach(function(column){
-                columns.push({dataField: column, caption: column, visible: false});
-            });
-
-            return columns;
+        function resetExplorerPage(){
+            $scope.subjectList = [];
+            $scope.dataVersionValues = [];
+            $scope.data = [];
+            $scope.collectionDatafields = [];
         }
+
+        $scope.$watch(function(scope) {return  $scope.outputCategories },
+            function(newValue, oldValue) {
+                if(newValue[0]){
+                    console.log('new value:  ' + newValue[0].name);
+                }
+                if(newValue[0]){
+                    resetExplorerPage();
+                }
+            }
+        );
 
         $scope.gridOptions = {
             bindingOptions: {

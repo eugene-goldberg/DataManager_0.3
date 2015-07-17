@@ -12,8 +12,8 @@ angular.module('datacollectors').run(['Menus',
         Menus.addSubMenuItem('topbar', 'datacollectors', 'View Playcards', 'view-playcard',null,true,['admin','pcviewer']);
         Menus.addSubMenuItem('topbar', 'datacollectors', 'DC Demand Dashboard', 'dashboard',null,true,['admin','dashviewer']);
 		Menus.addSubMenuItem('topbar', 'datacollectors', 'Request Access', 'request-access',null,true,['user']);
-		Menus.addMenuItem('topbar','Admin','admin','dropdown','/admin',true,['admin']);
-        Menus.addSubMenuItem('topbar', 'admin', 'Admin Tasks', 'admin');
+		Menus.addMenuItem('topbar','Admin','admin','dropdown','/admin',true,['app-admin']);
+        Menus.addSubMenuItem('topbar', 'admin', 'Admin Tasks', 'admin',null,true,['app-admin']);
 		Menus.addMenuItem('topbar','New Functionality','new-functionality','dropdown','/new-functionality',true,['admin','document-upload','sfupdate','pcupdate','pcviewer','dashviewer']);
         Menus.addSubMenuItem('topbar','new-functionality','Request New Functionality','request-new-functionality',null,true,['admin','document-upload','sfupdate','pcupdate','pcviewer','dashviewer']);
 

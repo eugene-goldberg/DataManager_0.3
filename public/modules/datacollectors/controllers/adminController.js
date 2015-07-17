@@ -15,6 +15,10 @@ angular.module('datacollectors').controller('AdminController', ['$scope', '$http
 
         $scope.userEmail;
 
+        $scope.userDisplayName;
+
+        $scope.selectedRoles = [];
+
         function getUsers(){
             $http({
                 method: 'GET',
@@ -47,6 +51,24 @@ angular.module('datacollectors').controller('AdminController', ['$scope', '$http
                 alert('error');
             });
         }
+
+        $scope.grantSelectedRolesToSelectedUsers = function(){
+            if($scope.userDisplayName){
+                $scope.selectedRoles.forEach(function(role){
+                    var json = {
+                        requestedRoles: $scope.selectedRoles,
+                        userEmail:  $scope.userEmail
+                    };
+                    $http.post('/grant_requested_roles', json)
+                        .success(function(data, status, headers, config) {
+
+                        }).
+                        error(function(data, status, headers, config) {
+                            alert('Error while granting requested roles');
+                        });
+                })
+            }
+        };
 
         $scope.generatePlaycardsFromDcInventory = function(){
             $http.post('/generate_playcards', {})
@@ -114,7 +136,17 @@ angular.module('datacollectors').controller('AdminController', ['$scope', '$http
 
             },
             selection: {
-                mode: 'multiple'
+                mode: 'single'
+            },
+            onSelectionChanged: function (selecteditems) {
+                var data = selecteditems.selectedRowsData;
+                if (data.length > 0) {
+                    $scope.userEmail = data[0].Email;
+                    $scope.userDisplayName = data[0].DisplayName;
+                }
+                else {
+
+                }
             }
         };
 
@@ -156,6 +188,15 @@ angular.module('datacollectors').controller('AdminController', ['$scope', '$http
             },
             selection: {
                 mode: 'multiple'
+            },
+            onSelectionChanged: function (selecteditems) {
+                var data = selecteditems.selectedRowsData;
+                if (data.length > 0) {
+                    $scope.selectedRoles.push(data[0].name);
+                }
+                else {
+
+                }
             }
         };
 

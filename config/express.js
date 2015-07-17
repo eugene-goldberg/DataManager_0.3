@@ -1634,15 +1634,39 @@ module.exports = function(db) {
 
                 var collection = db.collection('users');
 
-                var roles = req.body.requestedRoles.split(',');
+                var roles = [];
+
+                if (typeof req.body.requestedRoles[0] === 'string' || req.body.requestedRoles[0] instanceof String){
+                    roles.push(req.body.requestedRoles);
+                }
+                else {
+                    roles = req.body.requestedRoles.split(',');
+                }
+
+                if(typeof req.body.requestedRoles === 'string' || req.body.requestedRoles instanceof String){
+                    if(req.body.requestedRoles.indexOf(',') > 0){
+                        roles = req.body.requestedRoles.split(',');
+                    }
+                    else {
+                        roles = req.body.requestedRoles;
+                    }
+                }
+                //var roles = req.body.requestedRoles.split(',');
 
                 roles.forEach(function(role){
+                    var r;
+                    if(Array.isArray(role)){
+                        r = role[0];
+                    }
+                    else {
+                        r = role;
+                    }
                     collection.update(
                         {
                             email: req.body.userEmail
                         },
                         {
-                            $push: { roles: role }
+                            $push: { roles: r }
                         },
                         {upsert: true},
                         function(err, result) {

@@ -1709,33 +1709,54 @@ module.exports = function(db) {
                 }
                 //var roles = req.body.requestedRoles.split(',');
 
-                roles.forEach(function(role){
-                    var r;
-                    if(Array.isArray(role)){
-                        r = role[0];
-                    }
-                    else {
-                        r = role;
-                    }
-                    collection.update(
-                        {
-                            email: req.body.userEmail
-                        },
-                        {
-                            $push: { roles: r }
-                        },
-                        {upsert: true},
-                        function(err, result) {
-                            if (err) {
-                                console.log('err:  ' + err);
-                            }
-                            else {
-                                console.log('update result:  ' + result);
-
-                            }
+                if(Array.isArray(roles)){
+                    roles.forEach(function(role){
+                        var r;
+                        if(Array.isArray(role)){
+                            r = role[0];
                         }
-                    );
-                });
+                        else {
+                            r = role;
+                        }
+                        collection.update(
+                            {
+                                email: req.body.userEmail
+                            },
+                            {
+                                $push: { roles: r }
+                            },
+                            {upsert: true},
+                            function(err, result) {
+                                if (err) {
+                                    console.log('err:  ' + err);
+                                }
+                                else {
+                                    console.log('update result:  ' + result);
+
+                                }
+                            }
+                        );
+                    });
+                }
+                else {
+                        collection.update(
+                            {
+                                email: req.body.userEmail
+                            },
+                            {
+                                $push: { roles: roles }
+                            },
+                            {upsert: true},
+                            function(err, result) {
+                                if (err) {
+                                    console.log('err:  ' + err);
+                                }
+                                else {
+                                    console.log('update result:  ' + result);
+                                }
+                            }
+                        );
+                }
                 res.send(201);
                 assert.equal(null, err);
             }

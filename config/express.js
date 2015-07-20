@@ -133,57 +133,132 @@ module.exports = function(db) {
 	}
 
 	app.get('/mongodata', function(req, res){
-		console.log('Request Successful');
-		console.log('_parsedUrl.query:  ' + req._parsedUrl.query);
+        console.log('Request Successful');
+        console.log('_parsedUrl.query:  ' + req._parsedUrl.query);
 
         var skip = parseInt(req._parsedUrl.query.split('&')[3]);
 
-		var url_parts =  requestUrl.parse(req.url, true);
-		var query = url_parts.query;
+        var url_parts =  requestUrl.parse(req.url, true);
+        var query = url_parts.query;
 
-		var dataVersion = req.query.dataVersion;
+        var dataVersion = req.query.dataVersion;
 
-		MongoClient.connect(url, function (err, db) {
-			if (err) {
-				console.log('Unable to connect to the mongoDB server. Error:', err);
-			} else {
-				console.log('Connection established to', url);
+        MongoClient.connect(url, function (err, db) {
+            if (err) {
+                console.log('Unable to connect to the mongoDB server. Error:', err);
+            } else {
+                console.log('Connection established to', url);
 
-				var collection = db.collection(query.collectionName);
+                var collection = db.collection(query.collectionName);
 
-				if(query.dataVersion && query.subject){
-					collection.find({DataVersion: query.dataVersion,
-						Subject: query.subject
-					}).limit(500).skip(skip).toArray(function(err, docs) {
-						//console.log(docs);
-						res.json(docs);
-						assert.equal(null, err);
-						//db.close();
-					});
-				}
+                if(query.dataVersion && query.subject){
+                    collection.find({DataVersion: query.dataVersion,
+                        Subject: query.subject
+                    }).limit(500).skip(skip).toArray(function(err, docs) {
+                        //console.log(docs);
+                        res.json(docs);
+                        assert.equal(null, err);
+                        //db.close();
+                    });
+                }
 
-				//if(query.dataVersion){
-				//	collection.find({DataVersion: query.dataVersion
-				//	}).limit(500).skip(skip).toArray(function(err, docs) {
-				//		//console.log(docs);
-				//		res.json(docs);
-				//		assert.equal(null, err);
-				//		//db.close();
-				//	});
-				//}
+                //if(query.dataVersion && query.subject){
+                //    collection.find({DataVersion: query.dataVersion,
+                //        Subject: query.subject
+                //    }).toArray(function(err, docs) {
+                //        //console.log(docs);
+                //        res.json(docs);
+                //        assert.equal(null, err);
+                //        //db.close();
+                //    });
+                //}
 
-				//if(query.subject){
-				//	collection.find({Subject: query.subject
-				//	}).toArray(function(err, docs) {
-				//		//console.log(docs);
-				//		res.json(docs);
-				//		assert.equal(null, err);
-				//		//db.close();
-				//	});
-				//}
-			}
-		});
-	});
+                //if(query.dataVersion){
+                //	collection.find({DataVersion: query.dataVersion
+                //	}).limit(500).skip(skip).toArray(function(err, docs) {
+                //		//console.log(docs);
+                //		res.json(docs);
+                //		assert.equal(null, err);
+                //		//db.close();
+                //	});
+                //}
+
+                //if(query.subject){
+                //	collection.find({Subject: query.subject
+                //	}).toArray(function(err, docs) {
+                //		//console.log(docs);
+                //		res.json(docs);
+                //		assert.equal(null, err);
+                //		//db.close();
+                //	});
+                //}
+            }
+        });
+    });
+
+    app.get('/gambi_salesforce_data', function(req, res){
+        console.log('Request Successful');
+        console.log('_parsedUrl.query:  ' + req._parsedUrl.query);
+
+        var skip = parseInt(req._parsedUrl.query.split('&')[3]);
+
+        var url_parts =  requestUrl.parse(req.url, true);
+        var query = url_parts.query;
+
+        var dataVersion = req.query.dataVersion;
+
+        MongoClient.connect(url, function (err, db) {
+            if (err) {
+                console.log('Unable to connect to the mongoDB server. Error:', err);
+            } else {
+                console.log('Connection established to', url);
+
+                var collection = db.collection('SalesforceData');
+
+                if(query.Subject){
+                    var endResult = [];
+                    collection.find({Subject: query.Subject
+                    }).toArray(function(err, docs) {
+                        docs.forEach(function(doc){
+                            if(doc.DataCenters){
+                                var dataCenters = [];
+                                doc.DataCenters.forEach(function(dc){
+                                    dc.CSCOpportunityId = doc.CSCOpportunityId;
+                                    dc.OpportunityName = doc.OpportunityName;
+                                    dc.AccountName = doc.AccountName;
+                                    dc.OpportunityOwner = doc.OpportunityOwner;
+                                    dc.Stage = doc.Stage;
+                                    dc.Industry = doc.Industry;
+                                    dc.ACV = doc.ACV;
+                                    dc.RevenueStartDate = doc.RevenueStartDate;
+                                    dc.RevenueTerm = doc.RevenueTerm;
+                                    dc.ProbabilityPct = doc.ProbabilityPct;
+                                    dc.DealRegion = doc.DealRegion;
+                                    dc.DocumentAuthor = doc.DocumentAuthor;
+                                    dc.TabName = doc.TabName;
+                                    dc.SubjectCategory = doc.SubjectCategory;
+                                    dc.Subject = doc.Subject;
+                                    dc.DateDocumentProduced = doc.DateDocumentProduced;
+                                    dc.DateDocumentReceived = doc.DateDocumentReceived;
+                                    dc.DocumentSubmitter = doc.DocumentSubmitter;
+                                    dc.DocumentReviewer = doc.DocumentReviewer;
+                                    dc.OriginalSource = doc.OriginalSource;
+                                    dc.DataVersion = doc.DataVersion;
+                                    dc.DataFields = doc.DataFields;
+                                    dataCenters.push(dc);
+                                    endResult.push(dc);
+                                });
+                            }
+                        });
+                        res.json(endResult);
+                        assert.equal(null, err);
+                        //db.close();
+                    });
+                }
+
+            }
+        });
+    });
 
     app.get('/distinct_subject', function(req, res){
         console.log('Request Successful');

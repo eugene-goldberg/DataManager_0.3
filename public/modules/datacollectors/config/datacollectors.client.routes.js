@@ -9,14 +9,14 @@ angular.module('datacollectors').config(['$stateProvider',
 			url: '/document-upload',
 				templateUrl: 'modules/datacollectors/views/document-upload.client.view.html'
 		}).
-			state('sfupdate', {
-				url: '/sfupdate',
-				templateUrl: 'modules/datacollectors/views/salesforce-update.client.view.html'
-			}).
-            state('internal-demand', {
-                url: '/internal-demand',
-                templateUrl: 'modules/datacollectors/views/internal-dc-demand.client.view.html'
-            }).
+            //state('sfupdate', {
+				//url: '/sfupdate',
+				//templateUrl: 'modules/datacollectors/views/salesforce-update.client.view.html'
+            //}).
+            //state('internal-demand', {
+            //    url: '/internal-demand',
+            //    templateUrl: 'modules/datacollectors/views/internal-dc-demand.client.view.html'
+            //}).
             state('update-playcard', {
                 url: '/update-playcard',
                 templateUrl: 'modules/datacollectors/views/update-playcard.client.view.html'
@@ -25,37 +25,37 @@ angular.module('datacollectors').config(['$stateProvider',
                 url: '/view-playcard',
                 templateUrl: 'modules/datacollectors/views/playcard-v2.html'
             }).
-            state('dashboard', {
-                url: '/dashboard',
-                templateUrl: 'modules/datacollectors/views/dashboard.client.view.html'
-            }).
+            //state('dashboard', {
+            //    url: '/dashboard',
+            //    templateUrl: 'modules/datacollectors/views/dashboard.client.view.html'
+            //}).
 			state('dataexplorer', {
 				url: '/dataexplorer',
 				templateUrl: 'modules/datacollectors/views/dataexplorer.client.view.html'
 			}).
-            state('request-access', {
-                url: '/request-access',
-                templateUrl: 'modules/datacollectors/views/access-request-form.html'
-            }).
-            state('initial-access-request-feedback', {
-                url: '/initial-access-request-feedback',
-                templateUrl: 'modules/datacollectors/views/access-request-initial-feedback.html'
-            }).
-            state('new-functionality-request-feedback', {
-                url: '/new-functionality-request-feedback',
-                templateUrl: 'modules/datacollectors/views/new-functionality-request-feedback.html'
-            }).
+            //state('request-access', {
+            //    url: '/request-access',
+            //    templateUrl: 'modules/datacollectors/views/access-request-form.html'
+            //}).
+            //state('initial-access-request-feedback', {
+            //    url: '/initial-access-request-feedback',
+            //    templateUrl: 'modules/datacollectors/views/access-request-initial-feedback.html'
+            //}).
+            //state('new-functionality-request-feedback', {
+            //    url: '/new-functionality-request-feedback',
+            //    templateUrl: 'modules/datacollectors/views/new-functionality-request-feedback.html'
+            //}).
             state('admin', {
                 url: '/admin',
                 templateUrl: 'modules/datacollectors/views/admin-index.client.view.html'
-            }).
-            state('request-new-functionality', {
-                url: '/request-new-functionality',
-                templateUrl: 'modules/datacollectors/views/request-new-functionality.html'
-            }).
-            state('review-requests-for-new-functionality', {
-                url: '/review-requests-for-new-functionality',
-                templateUrl: 'modules/datacollectors/views/new-functionality-request-listing.html'
             });
+            //state('request-new-functionality', {
+            //    url: '/request-new-functionality',
+            //    templateUrl: 'modules/datacollectors/views/request-new-functionality.html'
+            //}).
+            //state('review-requests-for-new-functionality', {
+            //    url: '/review-requests-for-new-functionality',
+            //    templateUrl: 'modules/datacollectors/views/new-functionality-request-listing.html'
+            //});
 	}
 ]);

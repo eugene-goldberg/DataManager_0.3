@@ -21,6 +21,8 @@ angular.module('datacollectors').controller('DcUpdateController',
 
             initDcList();
 
+            $scope.playcardsExportReady = false;
+
             $scope.buList = [
                 {
                     name: 'GIS'
@@ -635,6 +637,28 @@ angular.module('datacollectors').controller('DcUpdateController',
                     }
                 });
             };
+
+            $scope.exportPlaycardsData = function(){
+                $http.post('/export_playcards_data', {})
+                    .success(function(data, status, headers, config) {
+                        $scope.playcardsExportReady = true;
+                        $http.get('/download_playcards_export').success(function(response) {
+                            console.log('success downloading playcards export  ' + response);
+                        });
+                    }).
+                    error(function(data, status, headers, config) {
+                        alert('Playcard Export Failed');
+                    });
+            };
+
+            //$scope.exportPlaycardsData = function(){
+            //
+            //            $http.get('/download_playcards_export').success(function(response) {
+            //                console.log('success downloading playcards export  ' + response);
+            //            });
+            //}
+
+
         }
     ]);
 

@@ -19,12 +19,14 @@ var fs = require('fs'),
     ObjectID = require('mongodb').ObjectID,
     format = require('date-format'),
     nodemailer = require('nodemailer'),
+    json2csv = require('json2csv'),
 	mongoStore = require('connect-mongo')({
 		session: session
 	}),
 	flash = require('connect-flash'),
 	config = require('./config'),
 	consolidate = require('consolidate'),
+    mime = require('mime'),
 	path = require('path');
 
     var pdf = require('html-pdf');
@@ -38,6 +40,8 @@ var fs = require('fs'),
             pass: 'Kpss1s0k'
         }
     });
+
+var playcardsFields = ['DcSiteCode','DcAddress','DcRegion','DcCountry','StrategicNaturesOfDc','AnnualDirectLeaseCost','DataCenterTypes','TenancyTypes','NetworkNodeTypes','KeyAccounts','SqFtCapacity','SqFtRaised','PctUtilization','DcTier','ContractTypes','LeaseEnds','KwLeasedUtilized','AnnualCost','KWL','Certifications','DcManager','DcRegionalHead','CscSecurityLead','ConsolidationStrategy','OverallStrategies','BuildDate','Vendor','ValueOfUtilization','DcProvider','DcProviderContact','AnnualTaxBill','ContractEndDate','CscBu','SqFtContracted','SqFtReservedForNewBusiness','Workloads','SqFtPctContracted','KwCapacity','KwContracted','KwReservedForNewBusiness','KwPctContracted','Kw$PerHour','OperationsCost','AnnualPowerCost','DcOfferingGm'];
 
     //var mailOptions = {
     //    from: 'DCDM Mailer <dcdmmailer@gmail.com>', // sender address
@@ -1837,6 +1841,68 @@ module.exports = function(db) {
             }
         });
     });
+
+    app.post('/export_playcards_data', function(req, res){
+        MongoClient.connect(url, function (err, db) {
+            if (err) {
+                console.log('Unable to connect to the mongoDB server. Error:', err);
+            } else {
+                console.log('Connection established to', url);
+
+                var collection = db.collection('PlaycardsData');
+
+                collection.find({}).toArray(function(err, docs) {
+                    json2csv({ data: docs, fields: playcardsFields }, function(err, csv) {
+                        if (err) console.log(err);
+                        //console.log(csv);
+                        fs.writeFile('PlayCards.csv', csv, function (err) {
+                            if (err){
+                                throw err;
+                            }
+                            else {
+                                res.send(201);
+                            }
+                        });
+
+                    });
+                    assert.equal(null, err);
+                    db.close();
+                });
+            }
+        });
+    });
+
+    //app.get('/download_playcards_export', function(req, res){
+    //
+    //    var file = 'PlayCards.csv';
+    //
+    //    var filename = path.basename(file);
+    //    var mimetype = mime.lookup(file);
+    //
+    //    res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+    //    res.setHeader('Content-type', mimetype);
+    //
+    //    //var filestream = fs.createReadStream(file);
+    //    //filestream.pipe(res);
+    //    res.download('/Users/eugene/Documents/dev/node/DataManager/','PlayCards.csv');
+    //});
+
+    app.get('/download_playcards_export', function(req, res){
+
+            var file = fs.createReadStream('/Users/eugene/Documents/dev/node/DataManager/PlayCards.csv');
+            var stat = fs.statSync('/Users/eugene/Documents/dev/node/DataManager/PlayCards.csv');
+            res.setHeader('Content-Length', stat.size);
+            res.setHeader('Content-Type', 'text/csv');
+            res.setHeader('Content-Disposition', 'attachment; filename=PlayCards.csv');
+            file.pipe(res);
+        }
+    );
+
+    //app.get('/download_playcards_export', function(req, res){
+    //    var filename = 'LICENSE.md';
+    //    res.attachment(filename);
+    //    res.end('hello,world\nkeesun,hi', 'UTF-8'); //Actually, the data will be loaded form db.
+    //});
 
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: false }));

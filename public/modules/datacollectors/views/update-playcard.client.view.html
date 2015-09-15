@@ -7,6 +7,11 @@
 
             <div ng-controller="DcUpdateController">
                 <!--<h4>selectedDcName:  {{selectedDcName[0].name}}</h4>-->
+                <br>
+                <input type="button" value="Export All Play Cards Records" ng-click="exportPlaycardsData()">
+                <br>
+                <a href="/download_playcards_export" ng-show="playcardsExportReady">Download CSV</a>
+                <br>
                 <form name="form" ng-submit="postUpdate()">
                     <div class="form-group">
                         <br>

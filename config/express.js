@@ -1889,8 +1889,8 @@ module.exports = function(db) {
 
     app.get('/download_playcards_export', function(req, res){
 
-            var file = fs.createReadStream('/Users/eugene/Documents/dev/node/DataManager/PlayCards.csv');
-            var stat = fs.statSync('/Users/eugene/Documents/dev/node/DataManager/PlayCards.csv');
+            var file = fs.createReadStream('/home/ubuntu/dev/node/DataManager/PlayCards.csv');
+            var stat = fs.statSync('/home/ubuntu/dev/node/DataManager/PlayCards.csv');
             res.setHeader('Content-Length', stat.size);
             res.setHeader('Content-Type', 'text/csv');
             res.setHeader('Content-Disposition', 'attachment; filename=PlayCards.csv');

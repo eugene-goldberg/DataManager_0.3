@@ -4,6 +4,23 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 	function($scope, $http, $location, Authentication) {
 		$scope.authentication = Authentication;
 
+		$scope.userHasCscEmail = false;
+        $scope.credentials = [];
+
+        $scope.$watch(function(scope) {return  $scope.credentials.email },
+            function(newValue, oldValue) {
+                if(newValue){
+                if(newValue.match(/@csc.com/g)){
+                    console.log('user email is @csc:  ' + newValue);
+                    $scope.userHasCscEmail = true;
+                    }
+                    else {
+                    $scope.userHasCscEmail = false;
+                    }
+                }
+            }
+        );
+
 		// If user is signed in then redirect back home
 		if ($scope.authentication.user) $location.path('/');
 

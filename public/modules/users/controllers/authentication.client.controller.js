@@ -5,7 +5,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 		$scope.authentication = Authentication;
 
 		$scope.userHasCscEmail = false;
-        $scope.credentials = [];
+        //$scope.credentials = [];
 
         $scope.$watch(function(scope) {return  $scope.credentials.email },
             function(newValue, oldValue) {
